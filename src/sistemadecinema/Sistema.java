@@ -1,15 +1,16 @@
 
 package sistemadecinema;
-import org.json.JSONObject;
+//import org.json.JSONObject;
 
-public class Sistema {
-    public static void main(String[] args) {
-     Filme filme = new Filme();  
-     
-     filme.setTitulo("Poderoso Chefão");
-     JSONObject titulo = new JSONObject("{ \"Titulo\" : \""+filme.getTitulo()+"\" }");
-       System.out.println(titulo);
-   
-    }
+public class Sistema extends Filme{
+    
+    public void insertFilme(String titulo){
+        Sistema.super.setTitulo("Poderoso Chefão");
+    };
+    public String listFilme(){
+       String titulo = Sistema.super.getTitulo();
+       
+       return titulo;
+    };
 }
 

@@ -17,7 +17,10 @@ class Filme {
     private Date dataInicioExibicao; // Data de início da exibição do filme
     private Date dataFimExibicao; // Data de fim da exibição do filme
     private int numeroAssistencias; // Número de assistências do filme
-
+    
+    public Filme(){
+   
+    }
     // Construtor da classe Filme
     public Filme(int idFilme, String titulo, String estilo, String sinopse, String diretor, int duracao, Date dataLancamento, Date dataInicioExibicao, Date dataFimExibicao, int numeroAssistencias) {
         this.idFilme = idFilme;

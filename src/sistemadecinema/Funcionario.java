@@ -2,14 +2,14 @@ import java.util.List;
 
 public class Funcionario {
     // Atributos
-    private int idFuncionario;
-    private String nome;
-    private String cargo;
-    private boolean acessoDespesas;
-    private boolean acessoBalancoMensal;
-    private boolean acessoRelatorios;
-    private boolean acessoEstoque;
-    private List<BalcaoAtendimento> balcoesAtendimento;
+    private int idFuncionario;    // Identificador único do funcionário
+    private String nome;             // Nome do funcionário
+    private String cargo;             // Cargo do funcionário
+    private boolean acessoDespesas;    // Indica se o funcionário tem acesso às despesas
+    private boolean acessoBalancoMensal;// Indica se o funcionário tem acesso ao balanço mensal
+    private boolean acessoRelatorios;   // Indica se o funcionário tem acesso aos relatórios
+    private boolean acessoEstoque;    // Indica se o funcionário tem acesso ao estoque
+    private List<BalcaoAtendimento> balcoesAtendimento; // Lista de balcões de atendimento atribuídos ao funcionário
 
     // Construtor
     public Funcionario(int idFuncionario, String nome, String cargo, boolean acessoDespesas, boolean acessoBalancoMensal,
@@ -93,17 +93,12 @@ public class Funcionario {
 
     // Método para autenticar o funcionário
     public void autenticar() {
-        // Lógica de autenticação
-        System.out.println("Funcionário autenticado com sucesso.");
+        // Implementação da autenticação
     }
 
-    // Método para verificar o acesso do funcionário
+    // Método para verificar acesso do funcionário
     public void verificarAcesso() {
-        System.out.println("Acesso do funcionário:");
-        System.out.println("Despesas: " + (acessoDespesas ? "Permitido" : "Negado"));
-        System.out.println("Balanço Mensal: " + (acessoBalancoMensal ? "Permitido" : "Negado"));
-        System.out.println("Relatórios: " + (acessoRelatorios ? "Permitido" : "Negado"));
-        System.out.println("Estoque: " + (acessoEstoque ? "Permitido" : "Negado"));
+        // Implementação para verificar o acesso do funcionário
     }
 
     @Override

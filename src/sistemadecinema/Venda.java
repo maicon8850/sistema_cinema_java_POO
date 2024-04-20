@@ -3,16 +3,17 @@ import java.util.List;
 
 public class Venda {
     // Atributos
-    private int idVenda;
-    private Cliente cliente;
-    private Filme filme;
-    private List<Produto> produtos;
-    private BalcaoAtendimento balcaoAtendimento;
-    private double valorTotal;
-    private Date dataHora;
+    private int idVenda;                 // Identificador único da venda
+    private Cliente cliente;               // Cliente que realizou a compra
+    private Filme filme;                    // Filme vendido
+    private List<Produto> produtos;        // Produtos vendidos
+    private BalcaoAtendimento balcaoAtendimento;  // Balcão de atendimento onde a venda foi realizada
+    private double valorTotal;              // Valor total da venda
+    private Date dataHora;                 // Data e hora da venda
 
     // Construtor
-    public Venda(int idVenda, Cliente cliente, Filme filme, List<Produto> produtos, BalcaoAtendimento balcaoAtendimento, double valorTotal, Date dataHora) {
+    public Venda(int idVenda, Cliente cliente, Filme filme, List<Produto> produtos,
+                 BalcaoAtendimento balcaoAtendimento, double valorTotal, Date dataHora) {
         this.idVenda = idVenda;
         this.cliente = cliente;
         this.filme = filme;
@@ -22,20 +23,66 @@ public class Venda {
         this.dataHora = dataHora;
     }
 
-    // Métodos Getters e Setters (removidos para brevidade)
+    // Métodos Getters e Setters
+    public int getIdVenda() {
+        return idVenda;
+    }
+
+    public void setIdVenda(int idVenda) {
+        this.idVenda = idVenda;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Filme getFilme() {
+        return filme;
+    }
+
+    public void setFilme(Filme filme) {
+        this.filme = filme;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public BalcaoAtendimento getBalcaoAtendimento() {
+        return balcaoAtendimento;
+    }
+
+    public void setBalcaoAtendimento(BalcaoAtendimento balcaoAtendimento) {
+        this.balcaoAtendimento = balcaoAtendimento;
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Date getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(Date dataHora) {
+        this.dataHora = dataHora;
+    }
 
     // Método para emitir fatura da venda
     public void emitirFatura() {
-        System.out.println("Fatura da Venda:");
-        System.out.println("ID da Venda: " + idVenda);
-        System.out.println("Cliente: " + cliente.getNome());
-        System.out.println("Filme: " + filme.getTitulo());
-        System.out.println("Produtos:");
-        for (Produto produto : produtos) {
-            System.out.println("- " + produto.getNome() + ": " + produto.getPreco());
-        }
-        System.out.println("Valor Total: " + valorTotal);
-        System.out.println("Data e Hora: " + dataHora);
+        // Implementação para emitir fatura da venda
     }
 
     @Override

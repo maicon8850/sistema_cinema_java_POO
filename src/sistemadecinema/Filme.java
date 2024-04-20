@@ -1,28 +1,24 @@
-package sistemadecinema;
-
 import java.util.Date;
 
-/**
- * Classe que representa um filme.
- */
-class Filme {
-    // Atributos da classe Filme
-    private int idFilme; // Identificador do filme
-    private String titulo; // Título do filme
-    private String estilo; // Estilo do filme (por exemplo, ação, comédia, drama)
-    private String sinopse; // Sinopse do filme
-    private String diretor; // Diretor do filme
-    private int duracao; // Duração do filme em minutos
-    private Date dataLancamento; // Data de lançamento do filme
-    private Date dataInicioExibicao; // Data de início da exibição do filme
-    private Date dataFimExibicao; // Data de fim da exibição do filme
-    private int numeroAssistencias; // Número de assistências do filme
-    
-    public Filme(){
-   
-    }
-    // Construtor da classe Filme
-    public Filme(int idFilme, String titulo, String estilo, String sinopse, String diretor, int duracao, Date dataLancamento, Date dataInicioExibicao, Date dataFimExibicao, int numeroAssistencias) {
+public class Filme {
+    // Atributos
+    private int idFilme;                // Identificador único do filme
+    private String titulo;              // Título do filme
+    private String estilo;              // Estilo do filme (ex: Ação, Comédia, Drama)
+    private String sinopse;             // Sinopse do filme
+    private String diretor;             // Diretor do filme
+    private int duracao;                // Duração do filme em minutos
+    private Date dataLancamento;        // Data de lançamento do filme
+    private Date dataInicioExibicao;    // Data de início de exibição do filme no cinema
+    private Date dataFimExibicao;       // Data de fim de exibição do filme no cinema
+    private int numeroAssistencias;     // Número de vezes que o filme foi assistido
+    private double avaliacao;           // Avaliação média do filme
+    private boolean legendado;          // Indica se o filme está disponível legendado
+    private boolean dublado;            // Indica se o filme está disponível dublado
+
+    // Construtor
+    public Filme(int idFilme, String titulo, String estilo, String sinopse, String diretor, int duracao,
+                 Date dataLancamento, Date dataInicioExibicao, Date dataFimExibicao, boolean legendado, boolean dublado) {
         this.idFilme = idFilme;
         this.titulo = titulo;
         this.estilo = estilo;
@@ -32,10 +28,13 @@ class Filme {
         this.dataLancamento = dataLancamento;
         this.dataInicioExibicao = dataInicioExibicao;
         this.dataFimExibicao = dataFimExibicao;
-        this.numeroAssistencias = numeroAssistencias;
+        this.numeroAssistencias = 0; // Inicialmente zero assistências
+        this.avaliacao = 0.0;        // Inicialmente sem avaliação
+        this.legendado = legendado;
+        this.dublado = dublado;
     }
 
-    // Métodos getters e setters para acessar e modificar os atributos
+    // Métodos Getters e Setters
     public int getIdFilme() {
         return idFilme;
     }
@@ -114,5 +113,71 @@ class Filme {
 
     public void setNumeroAssistencias(int numeroAssistencias) {
         this.numeroAssistencias = numeroAssistencias;
+    }
+
+    public double getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(double avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
+    public boolean isLegendado() {
+        return legendado;
+    }
+
+    public void setLegendado(boolean legendado) {
+        this.legendado = legendado;
+    }
+
+    public boolean isDublado() {
+        return dublado;
+    }
+
+    public void setDublado(boolean dublado) {
+        this.dublado = dublado;
+    }
+
+    // Métodos adicionais
+
+    // Método para registrar uma nova assistência ao filme
+    public void registrarAssistencia() {
+        this.numeroAssistencias++;
+    }
+
+    // Método para calcular o período assistido do filme
+    public int calcularPeriodoAssistido() {
+        // Lógica para calcular o período assistido (em minutos)
+        return 0; // Implemente conforme necessário
+    }
+
+    // Método para registrar uma nova avaliação do filme
+    public void registrarAvaliacao(double avaliacao) {
+        // Verificar se a avaliação está dentro do intervalo permitido (0 a 10, por exemplo)
+        if (avaliacao >= 0 && avaliacao <= 10) {
+            this.avaliacao = avaliacao;
+        } else {
+            System.out.println("Avaliação inválida. A avaliação deve estar entre 0 e 10.");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Filme{" +
+                "idFilme=" + idFilme +
+                ", titulo='" + titulo + '\'' +
+                ", estilo='" + estilo + '\'' +
+                ", sinopse='" + sinopse + '\'' +
+                ", diretor='" + diretor + '\'' +
+                ", duracao=" + duracao +
+                ", dataLancamento=" + dataLancamento +
+                ", dataInicioExibicao=" + dataInicioExibicao +
+                ", dataFimExibicao=" + dataFimExibicao +
+                ", numeroAssistencias=" + numeroAssistencias +
+                ", avaliacao=" + avaliacao +
+                ", legendado=" + legendado +
+                ", dublado=" + dublado +
+                '}';
     }
 }

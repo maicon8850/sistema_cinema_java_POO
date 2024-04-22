@@ -14,8 +14,9 @@ public class Programa {
     public static void main(String[] args) {
      
     Sistema sistema = new Sistema();
-    sistema.insertFilme("Poderoso chefão");
-    System.out.println(sistema.listFilme());
+    
+    sistema.insertFuncionario();
+    sistema.acessar();
 
     }
 }

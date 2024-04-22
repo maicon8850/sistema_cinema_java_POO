@@ -1,6 +1,7 @@
 import java.util.List;
 
 public class Funcionario {
+<<<<<<< Updated upstream
     // Atributos
     private int idFuncionario;    // Identificador único do funcionário
     private String nome;             // Nome do funcionário
@@ -114,4 +115,34 @@ public class Funcionario {
                 ", balcoesAtendimento=" + balcoesAtendimento +
                 '}';
     }
+=======
+    private int idFuncionario;
+    private String nome;
+    private String cargo;
+    private String user;
+    private String password;
+    private boolean acessoDespesas;
+    private boolean acessoBalancoMensal;
+    private boolean acessoRelatorios;
+    private boolean acessoEstoque;
+    private List<BalcaoAtendimento> balcoesAtendimento;
+    
+    public Funcionario(){
+        
+    }
+    
+    public String getUser(){
+        return this.user;
+    }
+    public void setUser( String user){
+        this.user = user;
+    }
+    public String getPassword(){
+        return password;
+    }
+    public void setPassword(String password){
+        this.password = password;
+    }
+    
+>>>>>>> Stashed changes
 }

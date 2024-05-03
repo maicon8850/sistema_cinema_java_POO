@@ -1,5 +1,3 @@
-
-
 package sistemadecinema;
 import java.util.List;
 
@@ -11,6 +9,9 @@ public class Cliente {
   private String endereço;
   private String telefone; 
 
+  public Cliente(){
+      
+  }
     public Cliente(String nome, String sobrenome, String cpf, String endereço, String telefone) {
         this.nome = nome;
         this.sobrenome = sobrenome;

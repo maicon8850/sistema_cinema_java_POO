@@ -1,11 +1,13 @@
+package sistemadecinema;
 import java.util.List;
 
 public class Funcionario {
-<<<<<<< Updated upstream
     // Atributos
     private int idFuncionario;    // Identificador único do funcionário
     private String nome;             // Nome do funcionário
     private String cargo;             // Cargo do funcionário
+    private String user;
+    private String password;
     private boolean acessoDespesas;    // Indica se o funcionário tem acesso às despesas
     private boolean acessoBalancoMensal;// Indica se o funcionário tem acesso ao balanço mensal
     private boolean acessoRelatorios;   // Indica se o funcionário tem acesso aos relatórios
@@ -13,6 +15,9 @@ public class Funcionario {
     private List<BalcaoAtendimento> balcoesAtendimento; // Lista de balcões de atendimento atribuídos ao funcionário
 
     // Construtor
+    public Funcionario(){
+        
+    }
     public Funcionario(int idFuncionario, String nome, String cargo, boolean acessoDespesas, boolean acessoBalancoMensal,
                        boolean acessoRelatorios, boolean acessoEstoque, List<BalcaoAtendimento> balcoesAtendimento) {
         this.idFuncionario = idFuncionario;
@@ -41,6 +46,24 @@ public class Funcionario {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
 
     public String getCargo() {
         return cargo;
@@ -115,34 +138,6 @@ public class Funcionario {
                 ", balcoesAtendimento=" + balcoesAtendimento +
                 '}';
     }
-=======
-    private int idFuncionario;
-    private String nome;
-    private String cargo;
-    private String user;
-    private String password;
-    private boolean acessoDespesas;
-    private boolean acessoBalancoMensal;
-    private boolean acessoRelatorios;
-    private boolean acessoEstoque;
-    private List<BalcaoAtendimento> balcoesAtendimento;
-    
-    public Funcionario(){
-        
-    }
-    
-    public String getUser(){
-        return this.user;
-    }
-    public void setUser( String user){
-        this.user = user;
-    }
-    public String getPassword(){
-        return password;
-    }
-    public void setPassword(String password){
-        this.password = password;
-    }
-    
->>>>>>> Stashed changes
 }
+
+   

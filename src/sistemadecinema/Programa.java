@@ -12,11 +12,11 @@ import org.json.JSONObject;
  */
 public class Programa {
     public static void main(String[] args) {
-     
-    Sistema sistema = new Sistema();
     
-    sistema.insertFuncionario();
-    sistema.acessar();
-
+    
+    WR es = new WR("'Kaique':'18 anos'", "clientes.txt");
+    es.escreverNoArquivo();
+    
+    
     }
 }

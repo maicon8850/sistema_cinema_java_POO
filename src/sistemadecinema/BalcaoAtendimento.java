@@ -1,4 +1,3 @@
-
 package sistemadecinema;
 
 import java.util.List;

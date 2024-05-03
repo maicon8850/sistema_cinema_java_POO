@@ -1,6 +1,4 @@
-
 package sistemadecinema;
-// comparator e comparable
 
 public class Login {
     private String user;

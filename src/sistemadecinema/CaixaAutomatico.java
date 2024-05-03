@@ -1,3 +1,5 @@
+package sistemadecinema;
+
 public class CaixaAutomatico {
     // Atributos
     private int idCaixa;      // Identificador único do caixa automático

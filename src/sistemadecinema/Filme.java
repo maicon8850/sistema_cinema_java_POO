@@ -1,3 +1,5 @@
+package sistemadecinema;
+
 import java.util.Date;
 
 public class Filme {
@@ -17,6 +19,9 @@ public class Filme {
     private boolean dublado;            // Indica se o filme está disponível dublado
 
     // Construtor
+    public Filme(){
+        
+    }
     public Filme(int idFilme, String titulo, String estilo, String sinopse, String diretor, int duracao,
                  Date dataLancamento, Date dataInicioExibicao, Date dataFimExibicao, boolean legendado, boolean dublado) {
         this.idFilme = idFilme;

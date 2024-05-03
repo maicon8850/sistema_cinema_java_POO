@@ -48,11 +48,13 @@ public class Funcionario {
     }
 
     public String getUser() {
+        
         return user;
     }
 
     public void setUser(String user) {
         this.user = user;
+        WR wr = new WR(this.user, "funcionarios.txt");
     }
 
     public String getPassword() {
@@ -61,6 +63,8 @@ public class Funcionario {
 
     public void setPassword(String password) {
         this.password = password;
+        WR wr = new WR(this.password, "funcionarios.txt");
+        wr.escreverNoArquivo();
     }
     
     

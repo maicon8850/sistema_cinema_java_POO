@@ -4,7 +4,9 @@
  */
 package sistemadecinema;
 
+import java.util.Scanner;
 import org.json.JSONObject;
+
 
 /**
  *
@@ -13,10 +15,31 @@ import org.json.JSONObject;
 public class Programa {
     public static void main(String[] args) {
     
+    Sistema sistema = new Sistema();
     
-    WR es = new WR("'Kaique':'18 anos'", "clientes.txt");
-    es.escreverNoArquivo();
+    Scanner s = new Scanner(System.in);
+    int opcao;
     
+    System.out.print("Bem vindo ao Cinema Diamantina!\n"
+            + "------------------\n"
+            + "Escolha o que deseja fazer:\n"
+            + "     1 - Cadastar cliente\n"
+            + "     2 - Cadastrar filme\n"
+            + "     3 - Cadastrar produtos\n"
+            + "     4 - Sair\n");
+   
+    opcao =  s.nextInt();
     
+    if(opcao == 1){
+        System.out.print("Usuário: ");
+        String usuario = s.nextLine();
+        System.out.print("Senha: ");
+        String senha = s.nextLine();
+        sistema.insertFuncionario(usuario,senha);
+        
     }
+    if(opcao == 2){
+        System.out.println("Vamos cadastrar produtos");
+    }
+}
 }

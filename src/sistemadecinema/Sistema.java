@@ -4,15 +4,19 @@ package sistemadecinema;
 public class Sistema{
     
     
+    
     //Filme filme = new Filme();
     
     //Produto produto = new Produto();
+    
    Funcionario funcionario = new Funcionario();
     
     
-    public void insertFuncionario(){
-      funcionario.setPassword("123");
-      funcionario.setUser("admin");
+    public void insertFuncionario(String user, String password){
+      funcionario.setPassword(password);
+      funcionario.setUser(user);
+  
+      
     }
        
     //}

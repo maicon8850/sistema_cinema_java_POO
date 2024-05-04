@@ -5,6 +5,9 @@
 
 package sistemadecinema;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import manipulararquivo.WR;
 import java.util.List;
 import org.json.JSONObject;
@@ -42,7 +45,7 @@ public class GerenciarFuncionario implements Gerenciador<Funcionario> {
         WR es = new WR();
         
         // Chama o método escreverNoArquivo para escrever as informações no arquivo "funcionario.json"
-        es.escreverNoArquivo(informacao + "\n", "funcionario.json", false); // Adiciona uma quebra de linha após cada objeto JSON
+        es.escreverNoArquivo(informacao + ";", "funcionario.json", false); // Adiciona uma ponto e virgula  após cada objeto JSON
     }
 
     /**
@@ -52,7 +55,56 @@ public class GerenciarFuncionario implements Gerenciador<Funcionario> {
      */
     @Override
     public Funcionario buscar(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Variável para armazenar o funcionário encontrado
+        Funcionario funcionarioEncontrado = null;
+
+        try {
+            // Caminho do arquivo
+            String diretorioTrabalho = System.getProperty("user.dir");
+            String caminhoCompleto = diretorioTrabalho + "/src/database/";
+            String arquivo = caminhoCompleto+"funcionario.json";
+            
+
+            // Cria um objeto BufferedReader para ler o arquivo
+            BufferedReader reader = new BufferedReader(new FileReader(arquivo));
+
+            // Variável para armazenar cada linha do arquivo
+            String linha;
+
+            // Lê o arquivo linha por linha
+            while ((linha = reader.readLine()) != null) {
+                // Converte a linha para um objeto JSON
+                JSONObject jsonFuncionario = new JSONObject(linha);
+
+                // Verifica se o ID do funcionário corresponde ao ID procurado
+                if (jsonFuncionario.getInt("idFuncionario") == id) {
+                // Se encontrar, cria um objeto Funcionario com os dados
+                    funcionarioEncontrado = new Funcionario(
+                    jsonFuncionario.getInt("idFuncionario"),
+                    jsonFuncionario.getString("nome"),
+                    jsonFuncionario.getString("cargo"),
+                    jsonFuncionario.getBoolean("acessoDespesas"),
+                    jsonFuncionario.getBoolean("acessoBalancoMensal"),
+                    jsonFuncionario.getBoolean("acessoRelatorios"),
+                    jsonFuncionario.getBoolean("acessoEstoque"),
+                    null // Você precisará corrigir isso se quiser passar a lista de balcões de atendimento
+                );
+                // Se houver mais atributos, adicione-os aqui
+
+                // Interrompe o loop, pois o funcionário foi encontrado
+                break;
+}
+            }
+
+            // Fecha o BufferedReader
+            reader.close();
+        } catch (IOException e) {
+            // Trata exceções de leitura do arquivo
+            e.printStackTrace();
+        }
+
+        // Retorna o funcionário encontrado (ou null se não encontrado)
+        return funcionarioEncontrado;
     }
 
     /**

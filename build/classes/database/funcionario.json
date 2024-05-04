@@ -1,2 +1,5 @@
 {"acessoDespesas":true,"nome":"Kaique","idFuncionario":1,"cargo":"Gerente","acessoBalancoMensal":true,"acessoRelatorios":true,"acessoEstoque":true}
 
+{"acessoDespesas":true,"nome":"Matheus","idFuncionario":2,"cargo":"Gerente","acessoBalancoMensal":true,"acessoRelatorios":true,"acessoEstoque":true}
+
+{"acessoDespesas":false,"nome":"Enzo","idFuncionario":3,"cargo":"Func","acessoBalancoMensal":false,"acessoRelatorios":false,"acessoEstoque":true};

@@ -17,7 +17,7 @@ public class Programa {
             // Exibe o menu de opções
             System.out.println("Menu:");
             System.out.println("1 - Cadastrar Cliente");
-            System.out.println("2 - Cadastrar Filme");
+            System.out.println("2 - Buscar Funcionário");
             System.out.println("3 - Cadastrar Funcionário");
             System.out.println("4 - Cadastrar Produto");
             System.out.println("5 - Editar Funcionário");
@@ -29,11 +29,16 @@ public class Programa {
             switch (opcao) {
                 case 1:
                     // Método para cadastrar cliente (implementação necessária)
-                    cadastrarCliente();
+                    //cadastrarCliente();
                     break;
                 case 2:
-                    // Método para cadastrar filme (implementação necessária)
-                    cadastrarFilme();
+                    System.out.print("Informe o ID do funcionário: ");
+                    int id = scanner.nextInt();
+                    scanner.nextLine();
+                    
+                    Funcionario searchResult = gerenciarFuncionario.buscar(id);
+                    System.out.println("ID: " + searchResult.getIdFuncionario());
+                    System.out.println("Nome: " + searchResult.getNome());
                     break;
                 case 3:
                     // Método para cadastrar funcionário
@@ -44,7 +49,7 @@ public class Programa {
 
                     // Solicita os dados do funcionário ao usuário
                     System.out.print("Informe o ID do funcionário: ");
-                    int id = scanner.nextInt();
+                    id = scanner.nextInt();
                     scanner.nextLine();
 
                     System.out.print("Informe o nome do funcionário: ");
@@ -97,14 +102,5 @@ public class Programa {
         scanner.close();
     }
 
-    // Métodos de cadastro e edição implementados aqui
-    // Implemente os métodos conforme necessário
 
-    private static void cadastrarCliente() {
-        // Implemente a lógica para cadastrar um cliente aqui
-    }
-
-    private static void cadastrarFilme() {
-        // Implemente a lógica para cadastrar um filme aqui
-    }
 }

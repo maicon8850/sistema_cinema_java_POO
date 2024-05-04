@@ -1,68 +1,153 @@
 package sistemadecinema;
+
 import java.util.List;
 
+/**
+ * Esta classe representa um cliente do sistema de cinema.
+ */
 public class Cliente {
 
-  private String nome;
-  private String sobrenome;
-  private String cpf;
-  private String endereço;
-  private String telefone; 
+    // Atributos
 
-  public Cliente(){
-      
-  }
-    public Cliente(String nome, String sobrenome, String cpf, String endereço, String telefone) {
+    private String nome;
+    private String sobrenome;
+    private String cpf;
+    private String endereco;
+    private String telefone;
+
+    // Construtores
+
+    /**
+     * Construtor padrão da classe Cliente.
+     */
+    public Cliente() {
+
+    }
+
+    /**
+     * Construtor da classe Cliente.
+     *
+     * @param nome      Nome do cliente.
+     * @param sobrenome Sobrenome do cliente.
+     * @param cpf       CPF do cliente.
+     * @param endereco  Endereço do cliente.
+     * @param telefone  Telefone do cliente.
+     */
+    public Cliente(String nome, String sobrenome, String cpf, String endereco, String telefone) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
-        this.endereço = endereço;
+        this.endereco = endereco;
         this.telefone = telefone;
     }
 
-    //Cliente() {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   // }
-//  private List<String> preferencias;
-  public String getNome() {
+    // Métodos Getters e Setters
+
+    /**
+     * Obtém o nome do cliente.
+     *
+     * @return O nome do cliente.
+     */
+    public String getNome() {
         return nome;
     }
 
+    /**
+     * Define o nome do cliente.
+     *
+     * @param nome O nome do cliente.
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * Obtém o sobrenome do cliente.
+     *
+     * @return O sobrenome do cliente.
+     */
     public String getSobrenome() {
         return sobrenome;
     }
 
+    /**
+     * Define o sobrenome do cliente.
+     *
+     * @param sobrenome O sobrenome do cliente.
+     */
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
 
+    /**
+     * Obtém o CPF do cliente.
+     *
+     * @return O CPF do cliente.
+     */
     public String getCpf() {
         return cpf;
     }
 
+    /**
+     * Define o CPF do cliente.
+     *
+     * @param cpf O CPF do cliente.
+     */
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public String getEndereço() {
-        return endereço;
+    /**
+     * Obtém o endereço do cliente.
+     *
+     * @return O endereço do cliente.
+     */
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEndereço(String endereço) {
-        this.endereço = endereço;
+    /**
+     * Define o endereço do cliente.
+     *
+     * @param endereco O endereço do cliente.
+     */
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
+    /**
+     * Obtém o telefone do cliente.
+     *
+     * @return O telefone do cliente.
+     */
     public String getTelefone() {
         return telefone;
     }
 
+    /**
+     * Define o telefone do cliente.
+     *
+     * @param telefone O telefone do cliente.
+     */
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-   
-    
+
+    // Método toString()
+
+    /**
+     * Retorna uma representação em string do objeto Cliente.
+     *
+     * @return Uma string representando o objeto Cliente.
+     */
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", telefone='" + telefone + '\'' +
+                '}';
+    }
 }

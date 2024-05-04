@@ -2,6 +2,9 @@ package sistemadecinema;
 
 import java.util.Date;
 
+/**
+ * Esta classe representa um filme no sistema de cinema.
+ */
 public class Filme {
     // Atributos
     private int idFilme;                // Identificador único do filme
@@ -18,146 +21,271 @@ public class Filme {
     private boolean legendado;          // Indica se o filme está disponível legendado
     private boolean dublado;            // Indica se o filme está disponível dublado
 
-    // Construtor
+    // Construtor padrão
     public Filme(){
-        
-    }
-    public Filme(int idFilme, String titulo, String estilo, String sinopse, String diretor, int duracao,
-                 Date dataLancamento, Date dataInicioExibicao, Date dataFimExibicao, boolean legendado, boolean dublado) {
-        this.idFilme = idFilme;
-        this.titulo = titulo;
-        this.estilo = estilo;
-        this.sinopse = sinopse;
-        this.diretor = diretor;
-        this.duracao = duracao;
-        this.dataLancamento = dataLancamento;
-        this.dataInicioExibicao = dataInicioExibicao;
-        this.dataFimExibicao = dataFimExibicao;
-        this.numeroAssistencias = 0; // Inicialmente zero assistências
-        this.avaliacao = 0.0;        // Inicialmente sem avaliação
-        this.legendado = legendado;
-        this.dublado = dublado;
+
     }
 
     // Métodos Getters e Setters
+
+    /**
+     * Obtém o ID do filme.
+     *
+     * @return O ID do filme.
+     */
     public int getIdFilme() {
         return idFilme;
     }
 
+    /**
+     * Define o ID do filme.
+     *
+     * @param idFilme O ID do filme.
+     */
     public void setIdFilme(int idFilme) {
         this.idFilme = idFilme;
     }
 
+    /**
+     * Obtém o título do filme.
+     *
+     * @return O título do filme.
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     * Define o título do filme.
+     *
+     * @param titulo O título do filme.
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
+    /**
+     * Obtém o estilo do filme.
+     *
+     * @return O estilo do filme.
+     */
     public String getEstilo() {
         return estilo;
     }
 
+    /**
+     * Define o estilo do filme.
+     *
+     * @param estilo O estilo do filme.
+     */
     public void setEstilo(String estilo) {
         this.estilo = estilo;
     }
 
+    /**
+     * Obtém a sinopse do filme.
+     *
+     * @return A sinopse do filme.
+     */
     public String getSinopse() {
         return sinopse;
     }
 
+    /**
+     * Define a sinopse do filme.
+     *
+     * @param sinopse A sinopse do filme.
+     */
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
     }
 
+    /**
+     * Obtém o diretor do filme.
+     *
+     * @return O diretor do filme.
+     */
     public String getDiretor() {
         return diretor;
     }
 
+    /**
+     * Define o diretor do filme.
+     *
+     * @param diretor O diretor do filme.
+     */
     public void setDiretor(String diretor) {
         this.diretor = diretor;
     }
 
+    /**
+     * Obtém a duração do filme.
+     *
+     * @return A duração do filme.
+     */
     public int getDuracao() {
         return duracao;
     }
 
+    /**
+     * Define a duração do filme.
+     *
+     * @param duracao A duração do filme.
+     */
     public void setDuracao(int duracao) {
         this.duracao = duracao;
     }
 
+    /**
+     * Obtém a data de lançamento do filme.
+     *
+     * @return A data de lançamento do filme.
+     */
     public Date getDataLancamento() {
         return dataLancamento;
     }
 
+    /**
+     * Define a data de lançamento do filme.
+     *
+     * @param dataLancamento A data de lançamento do filme.
+     */
     public void setDataLancamento(Date dataLancamento) {
         this.dataLancamento = dataLancamento;
     }
 
+    /**
+     * Obtém a data de início de exibição do filme.
+     *
+     * @return A data de início de exibição do filme.
+     */
     public Date getDataInicioExibicao() {
         return dataInicioExibicao;
     }
 
+    /**
+     * Define a data de início de exibição do filme.
+     *
+     * @param dataInicioExibicao A data de início de exibição do filme.
+     */
     public void setDataInicioExibicao(Date dataInicioExibicao) {
         this.dataInicioExibicao = dataInicioExibicao;
     }
 
+    /**
+     * Obtém a data de fim de exibição do filme.
+     *
+     * @return A data de fim de exibição do filme.
+     */
     public Date getDataFimExibicao() {
         return dataFimExibicao;
     }
 
+    /**
+     * Define a data de fim de exibição do filme.
+     *
+     * @param dataFimExibicao A data de fim de exibição do filme.
+     */
     public void setDataFimExibicao(Date dataFimExibicao) {
         this.dataFimExibicao = dataFimExibicao;
     }
 
+    /**
+     * Obtém o número de assistências do filme.
+     *
+     * @return O número de assistências do filme.
+     */
     public int getNumeroAssistencias() {
         return numeroAssistencias;
     }
 
+    /**
+     * Define o número de assistências do filme.
+     *
+     * @param numeroAssistencias O número de assistências do filme.
+     */
     public void setNumeroAssistencias(int numeroAssistencias) {
         this.numeroAssistencias = numeroAssistencias;
     }
 
+    /**
+     * Obtém a avaliação do filme.
+     *
+     * @return A avaliação do filme.
+     */
     public double getAvaliacao() {
         return avaliacao;
     }
 
+    /**
+     * Define a avaliação do filme.
+     *
+     * @param avaliacao A avaliação do filme.
+     */
     public void setAvaliacao(double avaliacao) {
         this.avaliacao = avaliacao;
     }
 
+    /**
+     * Verifica se o filme está disponível legendado.
+     *
+     * @return true se o filme está disponível legendado, caso contrário false.
+     */
     public boolean isLegendado() {
         return legendado;
     }
 
+    /**
+     * Define se o filme está disponível legendado.
+     *
+     * @param legendado true se o filme está disponível legendado, caso contrário false.
+     */
     public void setLegendado(boolean legendado) {
         this.legendado = legendado;
     }
 
+    /**
+     * Verifica se o filme está disponível dublado.
+     *
+     * @return true se o filme está disponível dublado, caso contrário false.
+     */
     public boolean isDublado() {
         return dublado;
     }
 
+    /**
+     * Define se o filme está disponível dublado.
+     *
+     * @param dublado true se o filme está disponível dublado, caso contrário false.
+     */
     public void setDublado(boolean dublado) {
         this.dublado = dublado;
     }
 
     // Métodos adicionais
 
-    // Método para registrar uma nova assistência ao filme
+    /**
+     * Método para registrar uma nova assistência ao filme.
+     */
     public void registrarAssistencia() {
         this.numeroAssistencias++;
     }
 
-    // Método para calcular o período assistido do filme
+    /**
+     * Método para calcular o período assistido do filme.
+     *
+     * @return O período assistido do filme em minutos.
+     */
     public int calcularPeriodoAssistido() {
         // Lógica para calcular o período assistido (em minutos)
         return 0; // Implemente conforme necessário
     }
 
-    // Método para registrar uma nova avaliação do filme
+    /**
+     * Método para registrar uma nova avaliação do filme.
+     *
+     * @param avaliacao A nova avaliação do filme.
+     */
     public void registrarAvaliacao(double avaliacao) {
         // Verificar se a avaliação está dentro do intervalo permitido (0 a 10, por exemplo)
         if (avaliacao >= 0 && avaliacao <= 10) {
@@ -167,6 +295,11 @@ public class Filme {
         }
     }
 
+    /**
+     * Retorna uma representação em string do objeto Filme.
+     *
+     * @return Uma string representando o objeto Filme.
+     */
     @Override
     public String toString() {
         return "Filme{" +

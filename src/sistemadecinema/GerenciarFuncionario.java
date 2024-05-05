@@ -5,11 +5,9 @@
 
 package sistemadecinema;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import manipulararquivo.WR;
 import java.util.List;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -26,27 +24,50 @@ public class GerenciarFuncionario implements Gerenciador<Funcionario> {
      */
     @Override
     public void cadastrar(Funcionario objeto) {
-        // Cria um objeto JSONObject para armazenar as informações do funcionário
-        JSONObject jsonFuncionario = new JSONObject();
-        
-        // Adiciona as informações do funcionário ao objeto JSON
-        jsonFuncionario.put("idFuncionario", objeto.getIdFuncionario());
-        jsonFuncionario.put("nome", objeto.getNome());
-        jsonFuncionario.put("cargo", objeto.getCargo());
-        jsonFuncionario.put("acessoDespesas", objeto.isAcessoDespesas());
-        jsonFuncionario.put("acessoBalancoMensal", objeto.isAcessoBalancoMensal());
-        jsonFuncionario.put("acessoRelatorios", objeto.isAcessoRelatorios());
-        jsonFuncionario.put("acessoEstoque", objeto.isAcessoEstoque());
-        
-        // Converte o objeto JSON em uma string
-        String informacao = jsonFuncionario.toString();
-        
-        // Cria uma instância local da classe WR
-        WR es = new WR();
-        
-        // Chama o método escreverNoArquivo para escrever as informações no arquivo "funcionario.json"
-        es.escreverNoArquivo(informacao + ";", "funcionario.json", false); // Adiciona uma ponto e virgula  após cada objeto JSON
+        try {
+            // Cria um objeto JSONObject para armazenar as informações do funcionário
+            JSONObject jsonFuncionario = new JSONObject();
+
+            // Adiciona as informações do funcionário ao objeto JSON
+            jsonFuncionario.put("idFuncionario", objeto.getIdFuncionario());
+            jsonFuncionario.put("nome", objeto.getNome());
+            jsonFuncionario.put("cargo", objeto.getCargo());
+
+            // Converte o objeto JSON em uma string
+            String informacao = jsonFuncionario.toString();
+
+            // Obtém o conteúdo atual do arquivo, se existir
+            WR utilitarioArquivo = new WR();
+            String conteudoArquivo = utilitarioArquivo.lerArquivo("funcionario.json");
+
+            // Se o conteúdo do arquivo for vazio, inicia um novo array JSON
+            if (conteudoArquivo.isEmpty()) {
+                conteudoArquivo = "[" + informacao + "]";
+            } else {
+                // Remove o último caractere (a ']') do conteúdo do arquivo
+                // Remove espaços em branco no início e no final da string,porque  não estava sobrescrevendo o ].
+                conteudoArquivo = conteudoArquivo.trim(); 
+                if (conteudoArquivo.endsWith("]")) {
+                conteudoArquivo = conteudoArquivo.substring(0, conteudoArquivo.length() - 1);
+}
+                // Adiciona uma vírgula para separar o último objeto JSON do novo
+                conteudoArquivo += ",";
+                // Adiciona o novo objeto JSON ao conteúdo do arquivo
+                conteudoArquivo += informacao;
+                // Adiciona o caractere de fechamento do array JSON
+                conteudoArquivo += "]";
+            }
+
+            // Escreve o conteúdo atualizado no arquivo
+            utilitarioArquivo.escreverNoArquivo(conteudoArquivo, "funcionario.json", true);
+
+            System.out.println("Funcionário cadastrado com sucesso.");
+        } catch (Exception e) {
+            // Trata exceções
+            System.out.println("Ocorreu um erro ao cadastrar o funcionário: " + e.getMessage());
+        }
     }
+
 
     /**
      * Método para buscar um funcionário pelo ID.
@@ -59,46 +80,42 @@ public class GerenciarFuncionario implements Gerenciador<Funcionario> {
         Funcionario funcionarioEncontrado = null;
 
         try {
-            // Caminho do arquivo
-            String diretorioTrabalho = System.getProperty("user.dir");
-            String caminhoCompleto = diretorioTrabalho + "/src/database/";
-            String arquivo = caminhoCompleto+"funcionario.json";
-            
+            WR utilitarioArquivo = new WR();
+            String conteudoArquivo = utilitarioArquivo.lerArquivo("funcionario.json");
 
-            // Cria um objeto BufferedReader para ler o arquivo
-            BufferedReader reader = new BufferedReader(new FileReader(arquivo));
+            // Converte o conteúdo do arquivo em um array JSON
+            JSONArray arrayFuncionarios = new JSONArray(conteudoArquivo);
 
-            // Variável para armazenar cada linha do arquivo
-            String linha;
-
-            // Lê o arquivo linha por linha
-            while ((linha = reader.readLine()) != null) {
-                // Converte a linha para um objeto JSON
-                JSONObject jsonFuncionario = new JSONObject(linha);
+            // Itera sobre os objetos JSON no array
+            for (int i = 0; i < arrayFuncionarios.length(); i++) {
+                JSONObject jsonFuncionario = arrayFuncionarios.getJSONObject(i);
 
                 // Verifica se o ID do funcionário corresponde ao ID procurado
                 if (jsonFuncionario.getInt("idFuncionario") == id) {
-                // Se encontrar, cria um objeto Funcionario com os dados
+                    // Se encontrar, cria um objeto Funcionario com os dados
                     funcionarioEncontrado = new Funcionario(
-                    jsonFuncionario.getInt("idFuncionario"),
-                    jsonFuncionario.getString("nome"),
-                    jsonFuncionario.getString("cargo"),
-                    jsonFuncionario.getBoolean("acessoDespesas"),
-                    jsonFuncionario.getBoolean("acessoBalancoMensal"),
-                    jsonFuncionario.getBoolean("acessoRelatorios"),
-                    jsonFuncionario.getBoolean("acessoEstoque"),
-                    null // Você precisará corrigir isso se quiser passar a lista de balcões de atendimento
-                );
-                // Se houver mais atributos, adicione-os aqui
+                        jsonFuncionario.getInt("idFuncionario"),
+                        jsonFuncionario.getString("nome"),
+                        jsonFuncionario.getString("cargo")
+                    );
 
-                // Interrompe o loop, pois o funcionário foi encontrado
-                break;
-}
+                    break;
+                }
             }
 
-            // Fecha o BufferedReader
-            reader.close();
-        } catch (IOException e) {
+            if (funcionarioEncontrado == null) {
+                System.out.println("Funcionário não encontrado.");
+            } else {
+                // Se o funcionário for encontrado, você pode fazer o que precisa com ele
+                // Por exemplo, exibir informações sobre o funcionário
+                System.out.println("Funcionário encontrado:");
+                System.out.println("ID: " + funcionarioEncontrado.getIdFuncionario());
+                System.out.println("Nome: " + funcionarioEncontrado.getNome());
+                System.out.println("Cargo: " + funcionarioEncontrado.getCargo());
+
+            }
+
+        } catch (Exception e) {
             // Trata exceções de leitura do arquivo
             e.printStackTrace();
         }

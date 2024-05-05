@@ -10,9 +10,7 @@ import java.io.BufferedReader;
  * Esta classe representa um utilitário para escrever informações em arquivos.
  */
 public class WR {
-        
-    private String informacao;
-    private String nomeArquivo;
+    
     
     /**
     * Construtor Padrão
@@ -27,7 +25,9 @@ public class WR {
      * @param informacao Dados que serão escritos no arquivo.
      * @param nomeArquivo Nome do arquivo onde os dados serão salvos.
      */
-   
+    public WR(String informacao, String nomeArquivo){
+        
+    }
     
     /**
      * Este método escreve as informações no arquivo.
@@ -67,4 +67,28 @@ public class WR {
             System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
         }
     }
+    
+    /**
+     * Este método lê as informações do arquivo.
+     * @param nomeArquivo Nome do arquivo a ser lido.
+     * @return Uma string contendo o conteúdo do arquivo.
+     */
+    public String lerArquivo(String nomeArquivo) {
+        StringBuilder conteudoArquivo = new StringBuilder();
+        try {
+            String diretorioTrabalho = System.getProperty("user.dir");
+            String caminhoCompleto = diretorioTrabalho + "/src/database/" + nomeArquivo;
+            BufferedReader reader = new BufferedReader(new FileReader(caminhoCompleto));
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                conteudoArquivo.append(linha);
+                conteudoArquivo.append("\n");
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao ler o arquivo: " + e.getMessage());
+        }
+        return conteudoArquivo.toString();
+    }
+    
 }

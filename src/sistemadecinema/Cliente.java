@@ -8,7 +8,7 @@ import java.util.List;
 public class Cliente {
 
     // Atributos
-
+    private int id;
     private String nome;
     private String sobrenome;
     private String cpf;
@@ -26,14 +26,14 @@ public class Cliente {
 
     /**
      * Construtor da classe Cliente.
-     *
+     * @param id        id do cliente.
      * @param nome      Nome do cliente.
      * @param sobrenome Sobrenome do cliente.
      * @param cpf       CPF do cliente.
      * @param endereco  Endereço do cliente.
      * @param telefone  Telefone do cliente.
      */
-    public Cliente(String nome, String sobrenome, String cpf, String endereco, String telefone) {
+    public Cliente(int id, String nome, String sobrenome, String cpf, String endereco, String telefone) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
@@ -42,6 +42,24 @@ public class Cliente {
     }
 
     // Métodos Getters e Setters
+    
+    /**
+     * Obtém o nome do id.
+     *
+     * @return O ID do cliente.
+     */
+    public int getId() {
+        return id;
+    }
+    /**
+     * Define o ID do cliente.
+     *
+     * @param id O ID do cliente.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     /**
      * Obtém o nome do cliente.
@@ -143,6 +161,7 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" +
+                "id='"+ id + '\'' +
                 "nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
                 ", cpf='" + cpf + '\'' +

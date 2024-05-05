@@ -1,5 +1,1 @@
-{"acessoDespesas":true,"nome":"Kaique","idFuncionario":1,"cargo":"Gerente","acessoBalancoMensal":true,"acessoRelatorios":true,"acessoEstoque":true}
-
-{"acessoDespesas":true,"nome":"Matheus","idFuncionario":2,"cargo":"Gerente","acessoBalancoMensal":true,"acessoRelatorios":true,"acessoEstoque":true}
-
-{"acessoDespesas":false,"nome":"Enzo","idFuncionario":3,"cargo":"Func","acessoBalancoMensal":false,"acessoRelatorios":false,"acessoEstoque":true};
+[{"nome":"Kaique","idFuncionario":1,"cargo":"gerente"},{"nome":"Matheus","idFuncionario":2,"cargo":"Funcionario"},{"nome":"Jorge","idFuncionario":3,"cargo":"Funcionario"},{"nome":"Enzo","idFuncionario":6,"cargo":"Func"},{"nome":"Davi","idFuncionario":9,"cargo":"Func"},{"nome":"Lindolfo","idFuncionario":6,"cargo":"Func"}]

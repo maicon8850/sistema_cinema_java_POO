@@ -1,8 +1,10 @@
 package sistemadecinema;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Representa um balcão de atendimento em um cinema.
+ */
 public class BalcaoAtendimento {
     // Lista estática para armazenar os balcões de atendimento
     private static List<BalcaoAtendimento> balcoesCinema = new ArrayList<>();
@@ -20,22 +22,34 @@ public class BalcaoAtendimento {
     // Nome do balcão de atendimento
     private String nome;
 
-    // Construtor para inicializar o balcão com um nome
+    /**
+     * Construtor para inicializar o balcão com um nome.
+     * @param nome O nome do balcão de atendimento.
+     */
     public BalcaoAtendimento(String nome) {
         this.nome = nome;
     }
 
-    // Método estático para obter a lista de balcões de atendimento
+    /**
+     * Obtém a lista de balcões de atendimento do cinema.
+     * @return A lista de balcões de atendimento.
+     */
     public static List<BalcaoAtendimento> getBalcoesCinema() {
         return balcoesCinema;
     }
 
-    // Método para obter o nome do balcão
+    /**
+     * Obtém o nome do balcão de atendimento.
+     * @return O nome do balcão de atendimento.
+     */
     public String getNome() {
         return nome;
     }
 
-    // Método para definir o nome do balcão
+    /**
+     * Define o nome do balcão de atendimento.
+     * @param nome O nome do balcão de atendimento.
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }

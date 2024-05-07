@@ -1,6 +1,6 @@
 /*
- * GerenciarFuncionario.java
- * Esta classe implementa a interface Gerenciador para gerenciar os funcionários do sistema de cinema.
+ * GestaoFuncionario.java
+ * Esta classe implementa a interface Gerenciador para Gestao os funcionários do sistema de cinema.
  */
 
 package sistemadecinema;
@@ -16,8 +16,39 @@ import org.json.JSONObject;
  * As informações dos funcionários são armazenadas em um arquivo JSON.
  * @author kaiqu
  */
-public class GerenciarFuncionario implements Gerenciador<Funcionario> {
+public class GestaoFuncionario implements Gestao<Funcionario> {
     
+    @Override
+public void salvar(List<Funcionario> funcionarios) {
+    try {
+        JSONArray jsonArrayFuncionarios = new JSONArray(); // Cria um novo array JSON
+
+        // Itera sobre a lista de funcionarios
+        for (Funcionario funcionario : funcionarios) {
+            // Cria um objeto JSON para cada funcionario e adiciona ao array JSON
+            JSONObject jsonFuncionario = new JSONObject();
+            jsonFuncionario.put("ID", funcionario.getIdFuncionario());
+            jsonFuncionario.put("nome", funcionario.getNome());
+            jsonFuncionario.put("cargo", funcionario.getCargo());
+            // Adicione outros atributos conforme necessário
+
+            jsonArrayFuncionarios.put(jsonFuncionario);
+        }
+
+        // Converte o array JSON em uma string
+        String jsonString = jsonArrayFuncionarios.toString();
+
+        // Escreve a string JSON no arquivo
+        WR utilitarioArquivo = new WR();
+        utilitarioArquivo.escreverNoArquivo(jsonString, "funcionarios.json", false);
+
+        System.out.println("Funcionários salvos com sucesso.");
+    } catch (Exception e) {
+        // Trata exceções
+        System.out.println("Ocorreu um erro ao salvar os funcionários: " + e.getMessage());
+    }
+}
+
     /**
      * Método para cadastrar um novo funcionário no sistema.
      * @param objeto O funcionário a ser cadastrado.

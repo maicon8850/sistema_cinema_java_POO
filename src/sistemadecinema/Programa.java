@@ -1,5 +1,6 @@
 package sistemadecinema;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Programa {
@@ -10,63 +11,48 @@ public class Programa {
         int opcao;
 
         // Instância dos gerenciadores
-        GerenciarFuncionario gerenciarFuncionario = new GerenciarFuncionario();
-        GerenciarCliente gerenciarCliente = new GerenciarCliente();
-        
-        System.out.println("Buscando Cliente...");
-        gerenciarCliente.buscar(3);
-        System.out.println("Buscando Funcionario...");
-        gerenciarFuncionario.buscar(2);
-        
-        // Solicita os dados do funcionário ao usuário
-//        System.out.print("Informe o ID do cliente: ");
-//        int idCliente = scanner.nextInt();
-//        scanner.nextLine();
-//
-//        System.out.print("Informe o nome do cliente: ");
-//        String nomeCliente = scanner.nextLine();
-//
-//        System.out.print("Informe o sobrenome do cliente: ");
-//        String sobrenome = scanner.nextLine();
-//        System.out.print("Informe o sobrenome do cpf: ");
-//        String cpf = scanner.nextLine();
-//        System.out.print("Informe o sobrenome do endereco: ");
-//        String endereco = scanner.nextLine();
-//        System.out.print("Informe o sobrenome do telefone: ");
-//        String telefone = scanner.nextLine();
-//
-//
-//        Cliente cliente = new Cliente(idCliente, nomeCliente, sobrenome, cpf, endereco,telefone);
-//        gerenciarCliente.cadastrar(cliente);
-  
+        GestaoFuncionario gestaoFuncionario = new GestaoFuncionario();
+        GestaoCliente gestaoCliente = new GestaoCliente();
 
+        // Criando os objetos Cliente com os dados falsos
+        Cliente cliente1 = new Cliente(1, "João", "Silva", "123.456.789-00", "Rua A, 123", "(00) 1234-5678");
+        Cliente cliente2 = new Cliente(2, "Maria", "Santos", "987.654.321-00", "Rua B, 456", "(00) 9876-5432");
+        Cliente cliente3 = new Cliente(3, "Pedro", "Souza", "456.789.123-00", "Rua C, 789", "(00) 4567-8901");
+        Cliente cliente4 = new Cliente(4, "Ana", "Oliveira", "321.654.987-00", "Rua D, 012", "(00) 6543-2109");
+        Cliente cliente5 = new Cliente(5, "Lucas", "Ferreira", "789.123.456-00", "Rua E, 345", "(00) 8901-2345");
+
+        // Adicionando os clientes ao GestaoCliente
+        gestaoCliente.cadastrar(cliente1);
+        gestaoCliente.cadastrar(cliente2);
+        gestaoCliente.cadastrar(cliente3);
+        gestaoCliente.cadastrar(cliente4);
+        gestaoCliente.cadastrar(cliente5);
+
+        // Exibindo os clientes cadastrados
+        gestaoCliente.listar();
        
-//        System.out.print("Informe o ID do funcionário: ");
-//        int id = scanner.nextInt();
-//        scanner.nextLine();
-//        gerenciarFuncionario.buscar(id);
-//
-//              
-//        System.out.println("Cadastrando funcionário...");
-//
-//
-//        // Solicita os dados do funcionário ao usuário
-//        System.out.print("Informe o ID do funcionário: ");
-//        id = scanner.nextInt();
-//        scanner.nextLine();
-//
-//        System.out.print("Informe o nome do funcionário: ");
-//        String nome = scanner.nextLine();
-//
-//        System.out.print("Informe o cargo do funcionário: ");
-//        String cargo = scanner.nextLine();
-//
-//
-//        Funcionario funcionario = new Funcionario(id, nome, cargo);
-//        gerenciarFuncionario.cadastrar(funcionario);
-//
-//
-//        System.out.println("Saindo do programa...");
+        
+        //Buscando um cliente especifico
+        gestaoCliente.buscar(5);
+        
+        //Editando cliente
+        Cliente clienteAtualizado = new Cliente(5, "Lucas", "Almeida", "789.123.456-00", "Rua E, 345", "(00) 8901-2345");
+        gestaoCliente.atualizar(clienteAtualizado);
+        
+        //listando cliente editado
+        gestaoCliente.buscar(5);
+        
+        //excluindo Cliente
+        gestaoCliente.deletar(4);
+        
+        // Exibindo os clientes cadastrados
+        gestaoCliente.listar();
+        
+        
+        //Salvando cliente
+        List arrayCliente = gestaoCliente.getListaCliente();
+        gestaoCliente.salvar(arrayCliente);
+ 
                     
        
     }

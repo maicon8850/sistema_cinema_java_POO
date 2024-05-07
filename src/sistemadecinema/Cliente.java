@@ -14,6 +14,7 @@ public class Cliente {
     private String cpf;
     private String endereco;
     private String telefone;
+    private static int instancias;
 
     // Construtores
 
@@ -21,7 +22,7 @@ public class Cliente {
      * Construtor padrão da classe Cliente.
      */
     public Cliente() {
-
+        instancias++;
     }
 
     /**
@@ -34,11 +35,17 @@ public class Cliente {
      * @param telefone  Telefone do cliente.
      */
     public Cliente(int id, String nome, String sobrenome, String cpf, String endereco, String telefone) {
+        this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.endereco = endereco;
         this.telefone = telefone;
+        instancias++;
+    }
+    
+    public int getInstancias(){
+        return instancias;
     }
 
     // Métodos Getters e Setters

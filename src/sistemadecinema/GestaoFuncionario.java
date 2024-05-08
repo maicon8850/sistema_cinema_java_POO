@@ -5,6 +5,7 @@
 
 package sistemadecinema;
 
+import java.util.ArrayList;
 import manipulararquivo.WR;
 import java.util.List;
 import org.json.JSONArray;
@@ -18,167 +19,160 @@ import org.json.JSONObject;
  */
 public class GestaoFuncionario implements Gestao<Funcionario> {
     
-    @Override
-public void salvar(List<Funcionario> funcionarios) {
-    try {
-        JSONArray jsonArrayFuncionarios = new JSONArray(); // Cria um novo array JSON
-
-        // Itera sobre a lista de funcionarios
-        for (Funcionario funcionario : funcionarios) {
-            // Cria um objeto JSON para cada funcionario e adiciona ao array JSON
-            JSONObject jsonFuncionario = new JSONObject();
-            jsonFuncionario.put("ID", funcionario.getIdFuncionario());
-            jsonFuncionario.put("nome", funcionario.getNome());
-            jsonFuncionario.put("cargo", funcionario.getCargo());
-            // Adicione outros atributos conforme necessário
-
-            jsonArrayFuncionarios.put(jsonFuncionario);
-        }
-
-        // Converte o array JSON em uma string
-        String jsonString = jsonArrayFuncionarios.toString();
-
-        // Escreve a string JSON no arquivo
-        WR utilitarioArquivo = new WR();
-        utilitarioArquivo.escreverNoArquivo(jsonString, "funcionarios.json", false);
-
-        System.out.println("Funcionários salvos com sucesso.");
-    } catch (Exception e) {
-        // Trata exceções
-        System.out.println("Ocorreu um erro ao salvar os funcionários: " + e.getMessage());
+    private List<Funcionario> arrayFuncionario;
+    
+    public GestaoFuncionario(){
+        arrayFuncionario = new ArrayList<>();
     }
-}
-
+    
     /**
      * Método para cadastrar um novo funcionário no sistema.
      * @param objeto O funcionário a ser cadastrado.
      */
     @Override
     public void cadastrar(Funcionario objeto) {
-        try {
-            // Cria um objeto JSONObject para armazenar as informações do funcionário
-            JSONObject jsonFuncionario = new JSONObject();
-
-            // Adiciona as informações do funcionário ao objeto JSON
-            jsonFuncionario.put("idFuncionario", objeto.getIdFuncionario());
-            jsonFuncionario.put("nome", objeto.getNome());
-            jsonFuncionario.put("cargo", objeto.getCargo());
-
-            // Converte o objeto JSON em uma string
-            String informacao = jsonFuncionario.toString();
-
-            // Obtém o conteúdo atual do arquivo, se existir
-            WR utilitarioArquivo = new WR();
-            String conteudoArquivo = utilitarioArquivo.lerArquivo("funcionario.json");
-
-            // Se o conteúdo do arquivo for vazio, inicia um novo array JSON
-            if (conteudoArquivo.isEmpty()) {
-                conteudoArquivo = "[" + informacao + "]";
-            } else {
-                // Remove o último caractere (a ']') do conteúdo do arquivo
-                // Remove espaços em branco no início e no final da string,porque  não estava sobrescrevendo o ].
-                conteudoArquivo = conteudoArquivo.trim(); 
-                if (conteudoArquivo.endsWith("]")) {
-                conteudoArquivo = conteudoArquivo.substring(0, conteudoArquivo.length() - 1);
-}
-                // Adiciona uma vírgula para separar o último objeto JSON do novo
-                conteudoArquivo += ",";
-                // Adiciona o novo objeto JSON ao conteúdo do arquivo
-                conteudoArquivo += informacao;
-                // Adiciona o caractere de fechamento do array JSON
-                conteudoArquivo += "]";
-            }
-
-            // Escreve o conteúdo atualizado no arquivo
-            utilitarioArquivo.escreverNoArquivo(conteudoArquivo, "funcionario.json", true);
-
-            System.out.println("Funcionário cadastrado com sucesso.");
-        } catch (Exception e) {
-            // Trata exceções
-            System.out.println("Ocorreu um erro ao cadastrar o funcionário: " + e.getMessage());
-        }
+        arrayFuncionario.add(objeto);
     }
-
-
+    
     /**
-     * Método para buscar um funcionário pelo ID.
-     * @param id O ID do funcionário a ser buscado.
-     * @return O funcionário encontrado, ou null se não for encontrado.
+     * Salva a lista de clientes em um arquivo JSON.
+     * @param funcionario A lista de clientes a ser salva.
      */
     @Override
+    public void salvar(List<Funcionario> funcionarios) {
+        try {
+            JSONArray jsonArrayFuncionarios = new JSONArray(); // Cria um novo array JSON
+
+            // Itera sobre a lista de clientes
+            for (Funcionario funcionario : funcionarios) {
+                // Cria um objeto JSON para cada cliente e adiciona ao array JSON
+                JSONObject jsonFuncionario = new JSONObject();
+                jsonFuncionario.put("ID", funcionario.getIdFuncionario());
+                jsonFuncionario.put("nome", funcionario.getNome());
+                jsonFuncionario.put("sobrenome", funcionario.getCargo());
+                
+                jsonArrayFuncionarios.put(jsonFuncionario);
+            }
+
+            // Converte o array JSON em uma string
+            String jsonString = jsonArrayFuncionarios.toString();
+
+            // Escreve a string JSON no arquivo
+            WR utilitarioArquivo = new WR();
+            utilitarioArquivo.escreverNoArquivo(jsonString, "funcionarios.json", true);
+
+            System.out.println("Funcionario salvos com sucesso.");
+        } catch (Exception e) {
+            // Trata exceções
+            System.out.println("Ocorreu um erro ao salvar os funcionarios: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Retorna a lista de clientes.
+     * @return A lista de clientes.
+     */
+    public List<Funcionario> getListaFuncionario(){
+        return arrayFuncionario; // Retorna a lista de clientes
+    }
+    
+    @Override
     public Funcionario buscar(int id) {
-        // Variável para armazenar o funcionário encontrado
         Funcionario funcionarioEncontrado = null;
 
-        try {
-            WR utilitarioArquivo = new WR();
-            String conteudoArquivo = utilitarioArquivo.lerArquivo("funcionario.json");
-
-            // Converte o conteúdo do arquivo em um array JSON
-            JSONArray arrayFuncionarios = new JSONArray(conteudoArquivo);
-
-            // Itera sobre os objetos JSON no array
-            for (int i = 0; i < arrayFuncionarios.length(); i++) {
-                JSONObject jsonFuncionario = arrayFuncionarios.getJSONObject(i);
-
-                // Verifica se o ID do funcionário corresponde ao ID procurado
-                if (jsonFuncionario.getInt("idFuncionario") == id) {
-                    // Se encontrar, cria um objeto Funcionario com os dados
-                    funcionarioEncontrado = new Funcionario(
-                        jsonFuncionario.getInt("idFuncionario"),
-                        jsonFuncionario.getString("nome"),
-                        jsonFuncionario.getString("cargo")
-                    );
-
-                    break;
-                }
+        // Itera sobre a lista de Funcionarios
+        for (Funcionario funcionario : arrayFuncionario) {
+            // Verifica se o ID do Funcionario corresponde ao ID procurado
+            if (funcionario.getIdFuncionario() == id) {
+                // Se encontrar, atribui o Funcionario encontrado à variável FuncionarioEncontrado e interrompe o loop
+                funcionarioEncontrado = funcionario;
+                break;
             }
-
-            if (funcionarioEncontrado == null) {
-                System.out.println("Funcionário não encontrado.");
-            } else {
-                // Se o funcionário for encontrado, você pode fazer o que precisa com ele
-                // Por exemplo, exibir informações sobre o funcionário
-                System.out.println("Funcionário encontrado:");
-                System.out.println("ID: " + funcionarioEncontrado.getIdFuncionario());
-                System.out.println("Nome: " + funcionarioEncontrado.getNome());
-                System.out.println("Cargo: " + funcionarioEncontrado.getCargo());
-
-            }
-
-        } catch (Exception e) {
-            // Trata exceções de leitura do arquivo
-            e.printStackTrace();
         }
 
-        // Retorna o funcionário encontrado (ou null se não encontrado)
+        // Se o Funcionario não for encontrado, imprime uma mensagem
+        if (funcionarioEncontrado == null) {
+            System.out.println("Funcionario não encontrado.");
+        } else {
+            // Se o Funcionario for encontrado, imprime suas informações
+            System.out.println("Funcionario encontrado:");
+            System.out.println("ID: " + funcionarioEncontrado.getIdFuncionario());
+            System.out.println("Nome: " + funcionarioEncontrado.getNome());
+            System.out.println("Nome: " + funcionarioEncontrado.getCargo());
+            
+        }
+
         return funcionarioEncontrado;
     }
 
     /**
-     * Método para listar todos os funcionários do sistema.
-     * @return Uma lista contendo todos os funcionários cadastrados.
+     * Lista todos os Funcionarios cadastrados.
+     * @return A lista completa de Funcionarios.
      */
     @Override
     public List<Funcionario> listar() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (Funcionario Funcionario : arrayFuncionario){
+            System.out.println(Funcionario.getNome() + " " + Funcionario.getCargo()); // Imprime cada Funcionario da lista
+        }
+
+        return arrayFuncionario; // Retorna a lista completa de Funcionarios
     }
 
     /**
-     * Método para atualizar as informações de um funcionário.
-     * @param objeto O funcionário com as informações atualizadas.
+     * Atualiza as informações de um Funcionario.
+     * @param FuncionarioAtualizado O Funcionario com as informações atualizadas.
      */
     @Override
-    public void atualizar(Funcionario objeto) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void atualizar(Funcionario FuncionarioAtualizado) {
+        // Variável para armazenar o índice do Funcionario a ser atualizado
+        int index = -1;
+
+        // Itera sobre a lista de Funcionarios
+        for (int i = 0; i < arrayFuncionario.size(); i++) {
+            // Verifica se o ID do Funcionario atual corresponde ao ID do Funcionario atualizado
+            if (arrayFuncionario.get(i).getIdFuncionario() == FuncionarioAtualizado.getIdFuncionario()) {
+                // Se encontrar, armazena o índice e interrompe o loop
+                index = i;
+                break;
+            }
+        }
+
+        // Verifica se o Funcionario foi encontrado
+        if (index != -1) {
+            // Atualiza as informações do Funcionario na lista com base no índice
+            arrayFuncionario.set(index, FuncionarioAtualizado);
+            System.out.println("Funcionario atualizado com sucesso.");
+        } else {
+            System.out.println("Funcionario não encontrado.");
+        }
     }
 
     /**
-     * Método para deletar um funcionário do sistema.
-     * @param id O ID do funcionário a ser deletado.
+     * Exclui um Funcionario da lista.
+     * @param id O ID do Funcionario a ser excluído.
      */
     @Override
     public void deletar(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }    
+        // Variável para armazenar o índice do Funcionario a ser excluído
+        int index = -1;
+
+        // Itera sobre a lista de Funcionarios
+        for (int i = 0; i < arrayFuncionario.size(); i++) {
+            // Verifica se o ID do Funcionario atual corresponde ao ID fornecido
+            if (arrayFuncionario.get(i).getIdFuncionario() == id) {
+                // Se encontrar, armazena o índice e interrompe o loop
+                index = i;
+                break;
+            }
+        }
+
+        // Verifica se o Funcionario foi encontrado
+        if (index != -1) {
+            // Remove o Funcionario da lista com base no índice
+            arrayFuncionario.remove(index);
+            System.out.println("Funcionario excluído com sucesso.");
+        } else {
+            System.out.println("Funcionario não encontrado.");
+        }
+    }
 }

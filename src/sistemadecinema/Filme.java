@@ -26,6 +26,24 @@ public class Filme {
 
     }
 
+    public Filme(int idFilme, String titulo, String estilo, String sinopse, String diretor, int duracao, Date dataLancamento, Date dataInicioExibicao, Date dataFimExibicao, int numeroAssistencias, double avaliacao, boolean legendado, boolean dublado) {
+        this.idFilme = idFilme;
+        this.titulo = titulo;
+        this.estilo = estilo;
+        this.sinopse = sinopse;
+        this.diretor = diretor;
+        this.duracao = duracao;
+        this.dataLancamento = dataLancamento;
+        this.dataInicioExibicao = dataInicioExibicao;
+        this.dataFimExibicao = dataFimExibicao;
+        this.numeroAssistencias = numeroAssistencias;
+        this.avaliacao = avaliacao;
+        this.legendado = legendado;
+        this.dublado = dublado;
+    }
+    
+    
+
     // Métodos Getters e Setters
 
     /**

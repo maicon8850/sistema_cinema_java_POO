@@ -2,6 +2,21 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/Gestao.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/CaixaAutomatico.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/database/clientes.json</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/Venda.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/GestaoCliente.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/Funcionario.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/Cliente.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/BalcaoAtendimento.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/Sistema.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/GestaoProduto.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/Programa.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/GestaoFilme.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/GestaoFuncionario.java</file>
+            <file>file:/C:/Users/kaiqu/Documents/NetBeansProjects/trabalhopratico2/src/sistemadecinema/Produto.java</file>
+        </group>
     </open-files>
 </project-private>

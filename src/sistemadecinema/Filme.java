@@ -1,6 +1,7 @@
 package sistemadecinema;
 
 import java.util.Date;
+import org.json.JSONObject;
 
 /**
  * Esta classe representa um filme no sistema de cinema.
@@ -280,39 +281,32 @@ public class Filme {
         this.dublado = dublado;
     }
 
-    // Métodos adicionais
-
+        // Método para converter o Filme em um JSONObject
     /**
-     * Método para registrar uma nova assistência ao filme.
-     */
-    public void registrarAssistencia() {
-        this.numeroAssistencias++;
-    }
-
-    /**
-     * Método para calcular o período assistido do filme.
+     * Converte o objeto Filme em um objeto JSONObject.
      *
-     * @return O período assistido do filme em minutos.
+     * @return Um JSONObject contendo as informações do filme.
      */
-    public int calcularPeriodoAssistido() {
-        // Lógica para calcular o período assistido (em minutos)
-        return 0; // Implemente conforme necessário
-    }
+    public JSONObject toJson() {
+        JSONObject jsonFilme = new JSONObject(); // Cria um novo objeto JSONObject
 
-    /**
-     * Método para registrar uma nova avaliação do filme.
-     *
-     * @param avaliacao A nova avaliação do filme.
-     */
-    public void registrarAvaliacao(double avaliacao) {
-        // Verificar se a avaliação está dentro do intervalo permitido (0 a 10, por exemplo)
-        if (avaliacao >= 0 && avaliacao <= 10) {
-            this.avaliacao = avaliacao;
-        } else {
-            System.out.println("Avaliação inválida. A avaliação deve estar entre 0 e 10.");
-        }
-    }
+        // Adiciona as informações do filme ao JSONObject
+        jsonFilme.put("idFilme", this.idFilme);
+        jsonFilme.put("titulo", this.titulo);
+        jsonFilme.put("estilo", this.estilo);
+        jsonFilme.put("sinopse", this.sinopse);
+        jsonFilme.put("diretor", this.diretor);
+        jsonFilme.put("duracao", this.duracao);
+        jsonFilme.put("dataLancamento", this.dataLancamento.toString()); // Salva a data de lançamento como string
+        jsonFilme.put("dataInicioExibicao", this.dataInicioExibicao.toString()); // Salva a data de início de exibição como string
+        jsonFilme.put("dataFimExibicao", this.dataFimExibicao.toString()); // Salva a data de fim de exibição como string
+        jsonFilme.put("numeroAssistencias", this.numeroAssistencias);
+        jsonFilme.put("avaliacao", this.avaliacao);
+        jsonFilme.put("legendado", this.legendado);
+        jsonFilme.put("dublado", this.dublado);
 
+        return jsonFilme; // Retorna o JSONObject representando o filme
+    }
     /**
      * Retorna uma representação em string do objeto Filme.
      *

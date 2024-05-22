@@ -1,6 +1,7 @@
 package sistemadecinema;
 
 import java.util.List;
+import org.json.JSONObject;
 
 /**
  * Esta classe representa um cliente do sistema de cinema.
@@ -44,6 +45,10 @@ public class Cliente {
         instancias++;
     }
     
+    /** 
+     * Método para pegar a quantidade de vezes que a classe Cliente foi instanciada
+     * @return quantidade de vezes que a classe Cliente foi instanciada
+     */
     public int getInstancias(){
         return instancias;
     }
@@ -157,6 +162,26 @@ public class Cliente {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+    
+    // Método toJson para converter Cliente em JSONObject
+    /**
+     * Converte o objeto Cliente em um objeto JSONObject.
+     * 
+     * @return Um JSONObject contendo as informações do cliente.
+     */
+//    public JSONObject toJson() {
+//        JSONObject jsonCliente = new JSONObject(); // Cria um novo objeto JSONObject
+//
+//        // Adiciona as informações do cliente ao JSONObject
+//        jsonCliente.put("ID", this.id);
+//        jsonCliente.put("nome", this.nome);
+//        jsonCliente.put("sobrenome", this.sobrenome);
+//        jsonCliente.put("cpf", this.cpf);
+//        jsonCliente.put("endereco", this.endereco);
+//        jsonCliente.put("telefone", this.telefone);
+//
+//        return jsonCliente; // Retorna o JSONObject
+//    }
 
     // Método toString()
 

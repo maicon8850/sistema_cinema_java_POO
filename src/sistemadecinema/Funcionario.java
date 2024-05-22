@@ -15,13 +15,7 @@ public class Funcionario {
     // Cargo do funcionário
     private String cargo;
 
-    // Nome de usuário do funcionário
-    private String user;
-
-    // Senha do funcionário
-    private String password;
-
-
+  
     // Construtores
 
     /**
@@ -101,58 +95,6 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    /**
-     * Obtém o nome de usuário do funcionário.
-     *
-     * @return O nome de usuário do funcionário.
-     */
-    public String getUser() {
-        return user;
-    }
-
-    /**
-     * Define o nome de usuário do funcionário.
-     *
-     * @param user O nome de usuário do funcionário.
-     */
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    /**
-     * Obtém a senha do funcionário.
-     *
-     * @return A senha do funcionário.
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Define a senha do funcionário.
-     *
-     * @param password A senha do funcionário.
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-   
-    /**
-     * Método para autenticar o funcionário.
-     * Este método implementa a lógica de autenticação do funcionário no sistema.
-     */
-    public void autenticar() {
-        // Implementação da autenticação
-    }
-
-    /**
-     * Método para verificar o acesso do funcionário.
-     * Este método verifica quais recursos o funcionário tem acesso no sistema.
-     */
-    public void verificarAcesso() {
-        // Implementação para verificar o acesso do funcionário
-    }
 
     // Sobrescrita do método toString()
 

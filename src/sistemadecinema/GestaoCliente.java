@@ -22,6 +22,10 @@ public class GestaoCliente implements Gestao<Cliente>{
         arrayCliente = new ArrayList<>(); // Inicializa a lista de clientes
     }
     
+    public List getListaClientes(){
+        return arrayCliente;
+    }
+    
     /**
      * Cadastra um novo cliente.
      * @param objeto O cliente a ser cadastrado.
@@ -65,14 +69,6 @@ public class GestaoCliente implements Gestao<Cliente>{
             // Trata exceções
             System.out.println("Ocorreu um erro ao salvar os clientes: " + e.getMessage());
         }
-    }
-    
-    /**
-     * Retorna a lista de clientes.
-     * @return A lista de clientes.
-     */
-    public List<Cliente> getListaCliente(){
-        return arrayCliente; // Retorna a lista de clientes
     }
     
     /**

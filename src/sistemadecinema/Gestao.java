@@ -20,7 +20,7 @@ public interface Gestao<T> {
     /**
      * Salva um objeto do tipo T.
      * 
-     * @param objeto o objeto a ser salvo
+     * 
      */
     void salvar(List<T> objeto);
     

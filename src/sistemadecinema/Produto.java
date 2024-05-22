@@ -1,6 +1,7 @@
 package sistemadecinema;
 
 import java.util.Date;
+import org.json.JSONObject;
 
 /**
  * Esta classe representa um produto no sistema de cinema.
@@ -25,13 +26,14 @@ public class Produto {
 
     /**
      * Construtor da classe Produto.
-     *
+     * @param idProduto Id do produto
      * @param nome Nome do produto.
      * @param preco Preço do produto.
      * @param dataValidade Data de validade do produto.
      * @param qtd_estoque Quantidade disponível em estoque do produto.
      */
-    public Produto(String nome, double preco, Date dataValidade, int qtd_estoque) {
+    public Produto(int idProduto, String nome, double preco, Date dataValidade, int qtd_estoque) {
+        this.idProduto = idProduto;
         this.nome = nome;
         this.preco = preco;
         this.dataValidade = dataValidade;
@@ -128,6 +130,25 @@ public class Produto {
      */
     public void setQtd_estoque(int qtd_estoque) {
         this.qtd_estoque = qtd_estoque;
+    }
+    
+    // Método para converter o Produto em um JSONObject
+    /**
+     * Converte o objeto Produto em um objeto JSONObject.
+     *
+     * @return Um JSONObject contendo as informações do produto.
+     */
+    public JSONObject toJson() {
+        JSONObject jsonProduto = new JSONObject(); // Cria um novo objeto JSONObject
+
+        // Adiciona as informações do produto ao JSONObject
+        jsonProduto.put("idProduto", this.idProduto);
+        jsonProduto.put("nome", this.nome);
+        jsonProduto.put("preco", this.preco);
+        jsonProduto.put("dataValidade", this.dataValidade.toString()); // Salva a data de validade como string
+        jsonProduto.put("qtd_estoque", this.qtd_estoque);
+
+        return jsonProduto; // Retorna o JSONObject representando o produto
     }
     
     /**

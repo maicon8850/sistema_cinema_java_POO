@@ -1,28 +1,33 @@
-/*
- * GestaoFuncionario.java
- * Esta classe implementa a interface Gerenciador para Gestao os funcionários do sistema de cinema.
- */
-
 package sistemadecinema;
 
 import java.util.ArrayList;
-import manipulararquivo.WR;
 import java.util.List;
+import manipulararquivo.WR;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
  * Esta classe gerencia as operações relacionadas aos funcionários do sistema de cinema.
- * Implementa a interface Gerenciador para fornecer métodos de cadastro, busca, listagem, atualização e exclusão de funcionários.
+ * Implementa a interface Gestao para fornecer métodos de cadastro, busca, listagem, atualização e exclusão de funcionários.
  * As informações dos funcionários são armazenadas em um arquivo JSON.
- * @author kaiqu
  */
 public class GestaoFuncionario implements Gestao<Funcionario> {
     
     private List<Funcionario> arrayFuncionario;
     
+    /**
+     * Construtor padrão para criar uma lista de funcionários no sistema.
+     */
     public GestaoFuncionario(){
         arrayFuncionario = new ArrayList<>();
+    }
+    
+    /**
+     * Retorna a lista de funcionários.
+     * @return A lista de funcionários.
+     */
+    public List<Funcionario> getListaFuncionario(){
+        return arrayFuncionario; // Retorna a lista de funcionários
     }
     
     /**
@@ -35,21 +40,21 @@ public class GestaoFuncionario implements Gestao<Funcionario> {
     }
     
     /**
-     * Salva a lista de clientes em um arquivo JSON.
-     * @param funcionario A lista de clientes a ser salva.
+     * Salva a lista de funcionários em um arquivo JSON.
+     * @param funcionarios A lista de funcionários a ser salva.
      */
     @Override
     public void salvar(List<Funcionario> funcionarios) {
         try {
             JSONArray jsonArrayFuncionarios = new JSONArray(); // Cria um novo array JSON
 
-            // Itera sobre a lista de clientes
+            // Itera sobre a lista de funcionários
             for (Funcionario funcionario : funcionarios) {
-                // Cria um objeto JSON para cada cliente e adiciona ao array JSON
+                // Cria um objeto JSON para cada funcionário e adiciona ao array JSON
                 JSONObject jsonFuncionario = new JSONObject();
                 jsonFuncionario.put("ID", funcionario.getIdFuncionario());
                 jsonFuncionario.put("nome", funcionario.getNome());
-                jsonFuncionario.put("sobrenome", funcionario.getCargo());
+                jsonFuncionario.put("cargo", funcionario.getCargo());
                 
                 jsonArrayFuncionarios.put(jsonFuncionario);
             }
@@ -61,104 +66,101 @@ public class GestaoFuncionario implements Gestao<Funcionario> {
             WR utilitarioArquivo = new WR();
             utilitarioArquivo.escreverNoArquivo(jsonString, "funcionarios.json", true);
 
-            System.out.println("Funcionario salvos com sucesso.");
+            System.out.println("Funcionários salvos com sucesso.");
         } catch (Exception e) {
             // Trata exceções
-            System.out.println("Ocorreu um erro ao salvar os funcionarios: " + e.getMessage());
+            System.out.println("Ocorreu um erro ao salvar os funcionários: " + e.getMessage());
         }
     }
     
-    /**
-     * Retorna a lista de clientes.
-     * @return A lista de clientes.
-     */
-    public List<Funcionario> getListaFuncionario(){
-        return arrayFuncionario; // Retorna a lista de clientes
-    }
     
+    /**
+     * Busca um funcionário pelo ID.
+     * @param id O ID do funcionário a ser buscado.
+     * @return O funcionário encontrado ou null se não encontrado.
+     */
     @Override
     public Funcionario buscar(int id) {
         Funcionario funcionarioEncontrado = null;
 
-        // Itera sobre a lista de Funcionarios
+        // Itera sobre a lista de funcionários
         for (Funcionario funcionario : arrayFuncionario) {
-            // Verifica se o ID do Funcionario corresponde ao ID procurado
+            // Verifica se o ID do funcionário corresponde ao ID procurado
             if (funcionario.getIdFuncionario() == id) {
-                // Se encontrar, atribui o Funcionario encontrado à variável FuncionarioEncontrado e interrompe o loop
+                // Se encontrar, atribui o funcionário encontrado à variável funcionarioEncontrado e interrompe o loop
                 funcionarioEncontrado = funcionario;
                 break;
             }
         }
 
-        // Se o Funcionario não for encontrado, imprime uma mensagem
+        // Se o funcionário não for encontrado, imprime uma mensagem
         if (funcionarioEncontrado == null) {
-            System.out.println("Funcionario não encontrado.");
+            System.out.println("Funcionário não encontrado.");
         } else {
-            // Se o Funcionario for encontrado, imprime suas informações
-            System.out.println("Funcionario encontrado:");
+            // Se o funcionário for encontrado, imprime suas informações
+            System.out.println("Funcionário encontrado:");
             System.out.println("ID: " + funcionarioEncontrado.getIdFuncionario());
             System.out.println("Nome: " + funcionarioEncontrado.getNome());
-            System.out.println("Nome: " + funcionarioEncontrado.getCargo());
-            
+            System.out.println("Cargo: " + funcionarioEncontrado.getCargo());
         }
 
         return funcionarioEncontrado;
     }
 
     /**
-     * Lista todos os Funcionarios cadastrados.
-     * @return A lista completa de Funcionarios.
+     * Lista todos os funcionários cadastrados.
+     * @return A lista completa de funcionários.
      */
     @Override
     public List<Funcionario> listar() {
-        for (Funcionario Funcionario : arrayFuncionario){
-            System.out.println(Funcionario.getNome() + " " + Funcionario.getCargo()); // Imprime cada Funcionario da lista
+        for (Funcionario funcionario : arrayFuncionario){
+            System.out.println(funcionario.getNome() + " - " + funcionario.getCargo()); // Imprime cada funcionário da lista
         }
 
-        return arrayFuncionario; // Retorna a lista completa de Funcionarios
+        return arrayFuncionario; // Retorna a lista completa de funcionários
     }
 
     /**
-     * Atualiza as informações de um Funcionario.
-     * @param FuncionarioAtualizado O Funcionario com as informações atualizadas.
+     * Atualiza as informações de um funcionário.
+     * @param funcionarioAtualizado O funcionário com as informações atualizadas.
      */
     @Override
-    public void atualizar(Funcionario FuncionarioAtualizado) {
-        // Variável para armazenar o índice do Funcionario a ser atualizado
+    public void atualizar(Funcionario funcionarioAtualizado) {
+        // Variável para armazenar o índice do funcionário a ser atualizado
         int index = -1;
 
-        // Itera sobre a lista de Funcionarios
+        // Itera sobre a lista de funcionários
         for (int i = 0; i < arrayFuncionario.size(); i++) {
-            // Verifica se o ID do Funcionario atual corresponde ao ID do Funcionario atualizado
-            if (arrayFuncionario.get(i).getIdFuncionario() == FuncionarioAtualizado.getIdFuncionario()) {
+            // Verifica se o ID do funcionário atual corresponde ao ID do funcionário atualizado
+            if (arrayFuncionario.get(i).getIdFuncionario() == funcionarioAtualizado.getIdFuncionario()) {
                 // Se encontrar, armazena o índice e interrompe o loop
                 index = i;
                 break;
             }
         }
 
-        // Verifica se o Funcionario foi encontrado
+        // Verifica se o funcionário foi encontrado
         if (index != -1) {
-            // Atualiza as informações do Funcionario na lista com base no índice
-            arrayFuncionario.set(index, FuncionarioAtualizado);
-            System.out.println("Funcionario atualizado com sucesso.");
+            // Atualiza as informações do funcionário na lista com base no índice
+            arrayFuncionario.set(index, funcionarioAtualizado);
+            System.out.println("Funcionário atualizado com sucesso.");
         } else {
-            System.out.println("Funcionario não encontrado.");
+            System.out.println("Funcionário não encontrado.");
         }
     }
 
     /**
-     * Exclui um Funcionario da lista.
-     * @param id O ID do Funcionario a ser excluído.
+     * Exclui um funcionário da lista.
+     * @param id O ID do funcionário a ser excluído.
      */
     @Override
     public void deletar(int id) {
-        // Variável para armazenar o índice do Funcionario a ser excluído
+        // Variável para armazenar o índice do funcionário a ser excluído
         int index = -1;
 
-        // Itera sobre a lista de Funcionarios
+        // Itera sobre a lista de funcionários
         for (int i = 0; i < arrayFuncionario.size(); i++) {
-            // Verifica se o ID do Funcionario atual corresponde ao ID fornecido
+            // Verifica se o ID do funcionário atual corresponde ao ID fornecido
             if (arrayFuncionario.get(i).getIdFuncionario() == id) {
                 // Se encontrar, armazena o índice e interrompe o loop
                 index = i;
@@ -166,13 +168,15 @@ public class GestaoFuncionario implements Gestao<Funcionario> {
             }
         }
 
-        // Verifica se o Funcionario foi encontrado
+        // Verifica se o funcionário foi encontrado
         if (index != -1) {
-            // Remove o Funcionario da lista com base no índice
+            // Remove o funcionário da lista com base no índice
             arrayFuncionario.remove(index);
-            System.out.println("Funcionario excluído com sucesso.");
+            System.out.println("Funcionário excluído com sucesso.");
         } else {
-            System.out.println("Funcionario não encontrado.");
+            System.out.println("Funcionário não encontrado.");
         }
     }
+    
+    
 }

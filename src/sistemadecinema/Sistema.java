@@ -10,12 +10,12 @@ import org.json.JSONObject;
  * Esta classe representa o sistema de gestão do cinema.
  */
 public class Sistema {
-    
+
     private GestaoFuncionario gestaoFuncionario = new GestaoFuncionario();
     private GestaoFilme gestaoFilme = new GestaoFilme();
     private GestaoCliente gestaoCliente = new GestaoCliente();
     private GestaoProduto gestaoProduto = new GestaoProduto();
-    
+
     private List<Venda> arrayVendaUnica;
 
     /**
@@ -63,7 +63,6 @@ public class Sistema {
     /**
      * Registra a venda no sistema e salva as informações em um arquivo JSON.
      */
-    
     public void registrarVenda(Venda venda) {
         try {
             // Cria um objeto JSON para a venda
@@ -113,13 +112,10 @@ public class Sistema {
         }
     }
 
-  
-    
     /**
      * Gera o resumo atual das vendas realizadas, exibindo informações sobre os produtos, filmes e valores.
      */
-    public void gerarResumoAtual(){
-        
+    public void gerarResumoAtual() {
         for (Venda vendaAtual : arrayVendaUnica) {
             System.out.println("Resumo da Venda:");
             System.out.println("ID da Venda: " + vendaAtual.getIdVenda());
@@ -137,14 +133,61 @@ public class Sistema {
             System.out.println(); // Adiciona uma linha em branco entre as vendas
         }
     }
-    
+
+    /**
+     * Gera o extrato de uma venda específica, exibindo informações sobre os produtos, filmes e valores.
+     *
+     * @param id O ID da venda.
+     */
+    public void gerarExtrato(int id) {
+        try {
+            // Lê o conteúdo atual do arquivo JSON
+            WR utilitarioArquivo = new WR();
+            String conteudoArquivo = utilitarioArquivo.lerArquivo("vendas.json");
+
+            if (!conteudoArquivo.isEmpty()) {
+                JSONArray jsonArrayVendas = new JSONArray(conteudoArquivo);
+
+                // Busca a venda pelo ID
+                for (int i = 0; i < jsonArrayVendas.length(); i++) {
+                    JSONObject jsonVenda = jsonArrayVendas.getJSONObject(i);
+                    if (jsonVenda.getInt("idVenda") == id) {
+                        System.out.println("Extrato da Venda:");
+                        System.out.println("ID da Venda: " + jsonVenda.getInt("idVenda"));
+                        System.out.println("Produtos:");
+                        JSONArray jsonArrayProdutos = jsonVenda.getJSONArray("produtos");
+                        for (int j = 0; j < jsonArrayProdutos.length(); j++) {
+                            JSONObject jsonProduto = jsonArrayProdutos.getJSONObject(j);
+                            System.out.println("  - " + jsonProduto.getString("nome"));
+                            System.out.println("    Preço: " + jsonProduto.getDouble("preco"));
+                        }
+                        JSONObject jsonFilme = jsonVenda.getJSONObject("filme");
+                        System.out.println("Filme:");
+                        System.out.println("  - " + jsonFilme.getString("titulo"));
+                        System.out.println("    Legendado: " + (jsonFilme.getBoolean("legendado") ? "Sim" : "Não"));
+                        System.out.println("    Horário de Início de Exibição: " + jsonFilme.get("dataInicioExibicao"));
+                        System.out.println("Valor Total: " + jsonVenda.getDouble("valorTotal"));
+                        System.out.println("Data e Hora da Venda: " + jsonVenda.get("dataHora"));
+                        return;
+                    }
+                }
+
+                System.out.println("Venda com ID " + id + " não encontrada.");
+            } else {
+                System.out.println("Nenhuma venda registrada.");
+            }
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao gerar o extrato: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Salva os registros do sistema em arquivos.
      */
     public void salvar() {
         System.out.println("Salvando clientes...");
         gestaoCliente.salvar();
-        System.out.println(gestaoCliente.getListaClientes());
         System.out.println("Salvando produtos...");
         gestaoProduto.salvar();
         System.out.println("Salvando funcionários...");

@@ -40,10 +40,13 @@ public class GestaoFilme implements Gestao<Filme>{
 
     /**
      * Salva a lista de filmes (não implementado).
-     * @param filmes A lista de filmes a ser salva.
      */
     @Override
-    public void salvar(List<Filme> filmes) {
+    public void salvar() {
+        
+        List<Filme> filmes = this.arrayFilmes;
+      
+        
         try {
             JSONArray jsonArrayFilmes = new JSONArray(); // Cria um novo array JSON
 
@@ -57,6 +60,7 @@ public class GestaoFilme implements Gestao<Filme>{
                 jsonFilme.put("sinopse", filme.getSinopse());
                 jsonFilme.put("diretor", filme.getDiretor());
                 jsonFilme.put("duracao", filme.getDuracao());
+                jsonArrayFilmes.put(jsonFilme);
                 
             }
 

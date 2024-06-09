@@ -14,6 +14,7 @@ public class Produto {
     private double preco; // Preço do produto
     private Date dataValidade; // Data de validade do produto
     private int qtd_estoque; // Quantidade disponível em estoque do produto
+    private static  int instancias;
 
     // Construtores
 
@@ -21,7 +22,7 @@ public class Produto {
      * Construtor padrão da classe Produto.
      */
     public Produto(){
-
+        instancias++;
     }
 
     /**
@@ -38,6 +39,8 @@ public class Produto {
         this.preco = preco;
         this.dataValidade = dataValidade;
         this.qtd_estoque = qtd_estoque;
+        
+        instancias++;
     }
 
     // Métodos Getters e Setters
@@ -49,6 +52,10 @@ public class Produto {
      */
     public int getIdProduto() {
         return idProduto;
+    }
+    
+    public int getInstancias(){
+        return instancias;
     }
 
     /**

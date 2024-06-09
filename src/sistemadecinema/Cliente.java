@@ -16,6 +16,7 @@ public class Cliente {
     private String endereco;
     private String telefone;
     private static int instancias;
+    protected static int instanciaProtected;
 
     // Construtores
 
@@ -24,6 +25,7 @@ public class Cliente {
      */
     public Cliente() {
         instancias++;
+        instanciaProtected++;
     }
 
     /**
@@ -43,6 +45,8 @@ public class Cliente {
         this.endereco = endereco;
         this.telefone = telefone;
         instancias++;
+        instanciaProtected++;
+
     }
     
     /** 
@@ -163,28 +167,7 @@ public class Cliente {
         this.telefone = telefone;
     }
     
-    // Método toJson para converter Cliente em JSONObject
-    /**
-     * Converte o objeto Cliente em um objeto JSONObject.
-     * 
-     * @return Um JSONObject contendo as informações do cliente.
-     */
-//    public JSONObject toJson() {
-//        JSONObject jsonCliente = new JSONObject(); // Cria um novo objeto JSONObject
-//
-//        // Adiciona as informações do cliente ao JSONObject
-//        jsonCliente.put("ID", this.id);
-//        jsonCliente.put("nome", this.nome);
-//        jsonCliente.put("sobrenome", this.sobrenome);
-//        jsonCliente.put("cpf", this.cpf);
-//        jsonCliente.put("endereco", this.endereco);
-//        jsonCliente.put("telefone", this.telefone);
-//
-//        return jsonCliente; // Retorna o JSONObject
-//    }
-
-    // Método toString()
-
+   
     /**
      * Retorna uma representação em string do objeto Cliente.
      *

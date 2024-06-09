@@ -1,99 +1,123 @@
 package sistemadecinema;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Programa {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        int opcao;
-
-        // Instância dos gerenciadores
-        GestaoFuncionario gestaoFuncionario = new GestaoFuncionario();
+        
+        //Cadastro de filme e produto para teste
         GestaoFilme gestaoFilme = new GestaoFilme();
-        GestaoCliente gestaoCliente = new GestaoCliente();
+        //Filmes
+        Filme filme1 = new Filme(1, "Matrix", "Ação", "Um hacker descobre a verdade sobre a realidade e sua luta contra as máquinas.",
+                "Lana Wachowski, Lilly Wachowski", 136, new Date(), new Date(), new Date(), 0, 0.0, true, true);
+        gestaoFilme.cadastrar(filme1);
+        
         GestaoProduto gestaoProduto = new GestaoProduto();
-        Sistema sistema = new Sistema();
-    
-
-//Criando os objetos Cliente com os dados falsos
-        Cliente cliente1 = new Cliente(1, "João", "Silva", "123.456.789-00", "Rua A, 123", "(00) 1234-5678");
-        Cliente cliente2 = new Cliente(2, "Maria", "Santos", "987.654.321-00", "Rua B, 456", "(00) 9876-5432");
+        Produto produto1 = new Produto(1, "Produto A", 10.50, new Date(), 50);
+        gestaoProduto.cadastrar(produto1);
+        Produto produto2 = new Produto(2, "Produto B", 15.50, new Date(), 50);
+        
+        //--------Questao 1 ---------------
+        //Classes implementadas
+        //--------Questao 2 ---------------
+        //Sistema sendo utilizados por colaboradores e ADM
+        //--------Questao 3 ---------------
+        //Método ToString sobrescritos em cada classe
+        
+        //--------Questao 4 ---------------
+        //Não foi utilizado herança nas classes, foi utilizado classe de interface
+        
+        //--------Questao 5  ---------------
+        //Balcões criados de maneira estática 
+        
+        //--------Questao 6 ---------------
+        GestaoFuncionario gestaoFuncionario = new GestaoFuncionario();
+        Funcionario func = new Funcionario(1, "João Pedro", "Gerente");
+        gestaoFuncionario.cadastrar(func);
+        
+        Funcionario funcAtualizado = new Funcionario(1, "João Pedro Almeida", "Gerente");
+        gestaoFuncionario.atualizar(funcAtualizado);
+        
+        //--------Questao 7 ---------------
+        GestaoCliente gestaoCliente = new GestaoCliente();
+        Cliente cliente = new Cliente(2, "Maria", "Santos", "987.654.321-00", "Rua B, 456", "(00) 9876-5432");
         Cliente cliente3 = new Cliente(3, "Pedro", "Souza", "456.789.123-00", "Rua C, 789", "(00) 4567-8901");
         Cliente cliente4 = new Cliente(4, "Ana", "Oliveira", "321.654.987-00", "Rua D, 012", "(00) 6543-2109");
-        Cliente cliente5 = new Cliente(5, "Lucas", "Ferreira", "789.123.456-00", "Rua E, 345", "(00) 8901-2345");
-
-       
-        //        // Adicionando os clientes ao GestaoCliente
-        gestaoCliente.cadastrar(cliente1);
-        gestaoCliente.cadastrar(cliente2);
+        
+        gestaoCliente.cadastrar(cliente);
         gestaoCliente.cadastrar(cliente3);
         gestaoCliente.cadastrar(cliente4);
-        gestaoCliente.cadastrar(cliente5);
+       
+        
+        Cliente clienteAtualizado = new Cliente(2, "Maria", "Santos dos Santos", "987.654.321-00", "Rua B, 456", "(00) 9876-5432");
+        gestaoCliente.atualizar(clienteAtualizado);
+        
+        gestaoCliente.listar();
+        
+        gestaoCliente.buscar(3);
+        gestaoCliente.deletar(4);
+        
+        //--------Questao 8 ---------------
+        //Vendas 
+       
+        Cliente clienteVenda = gestaoCliente.buscar(3);
+        Filme filmeVenda = gestaoFilme.buscar(1);
+        Cliente clienteVenda2 = gestaoCliente.buscar(2);
+        Filme filmeVenda2 = gestaoFilme.buscar(1);
+    
+        
+        Venda venda1 = new Venda(1, clienteVenda, filmeVenda, List.of(produto1, produto2), 1, 15.0, new Date());
+        Venda venda2 = new Venda(2, clienteVenda2, filmeVenda2, List.of(produto2), 2, 6.0, new Date());
+        
+        
+        Sistema sistema = new Sistema();
+        sistema.iniciarVenda(venda1);
+        //Extrato da venda
+        sistema.gerarResumoAtual();
+        
+        
+        //------- Questao 9
+        //Chamar os método de  salvar
+        //Cadastros realizados dinâmicamente na funcao cadastrar
+        //sistema.registrarVenda();
+        //gestaoCliente.salvar();
+        //gestaoFilme.salvar();
+        //gestaoFuncionario.salvar();
+        //gestaoProduto.salvar();
+        sistema.salvar();
+        
+        //-------- Questao 10
+        //Gerar o extrato e salvar 
+        sistema.registrarVenda(venda1);
+        //--------Questao 11
+        //uso do PRIVATE método GET E SET, houve necessidade de instanciar a classe e somente podemos acessar
+        //As intsnacias através do método GET 
+        System.out.println("Foram instanciadas a classe cliente: "+ cliente.getInstancias() + " vezes");
+        
+        //Uso do proteceted, permite o acesso direto dentro do mesmo pacote 
+        int instanciasProtected = Cliente.instanciaProtected;
+        System.out.println("Foram instanciadas Usnado Protected a classe cliente: "+ instanciasProtected + " vezes");
         
         
         
-        List arrayCliente = gestaoCliente.getListaClientes();
-        gestaoCliente.salvar(arrayCliente);
+        //-----Questao 12
         
-        gestaoCliente.buscar(2);
-//
-//
-//    
-//        //Filmes
-//        Filme filme1 = new Filme(1, "Matrix", "Ação", "Um hacker descobre a verdade sobre a realidade e sua luta contra as máquinas.",
-//                "Lana Wachowski, Lilly Wachowski", 136, new Date(), new Date(), new Date(), 0, 0.0, true, true);
-//
-//        Filme filme2 = new Filme(2, "Pulp Fiction", "Crime", "Histórias interligadas sobre crime e redenção no submundo de Los Angeles.",
-//                "Quentin Tarantino", 154, new Date(), new Date(), new Date(), 0, 0.0, true, true);
-//
-//        Filme filme3 = new Filme(3, "O Senhor dos Anéis: A Sociedade do Anel", "Fantasia",
-//                "Um hobbit é encarregado de destruir um poderoso anel antes que ele caia nas mãos do mal.",
-//                "Peter Jackson", 178, new Date(), new Date(), new Date(), 0, 0.0, true, true);
-//
-//        Filme filme4 = new Filme(4, "Interestelar", "Ficção Científica",
-//                "Um grupo de exploradores viaja pelo espaço em busca de um novo lar para a humanidade.",
-//                "Christopher Nolan", 169, new Date(), new Date(), new Date(), 0, 0.0, true, true);
-//
-//        Filme filme5 = new Filme(5, "Forrest Gump: O Contador de Histórias", "Drama",
-//                "Um homem simples vive uma vida extraordinária ao longo de várias décadas.",
-//                "Robert Zemeckis", 142, new Date(), new Date(), new Date(), 0, 0.0, true, true);
-//        
-//        gestaoFilme.cadastrar(filme1);
-//        gestaoFilme.cadastrar(filme2);
-//        gestaoFilme.cadastrar(filme3);
-//        gestaoFilme.cadastrar(filme4);
-//        gestaoFilme.cadastrar(filme5);
-//        
-//
-//
-//        //Produtos
-//         
-//        Produto produto1 = new Produto(1, "Produto A", 10.50, new Date(), 50);
-//        Produto produto2 = new Produto(2, "Produto B", 20.75, new Date(), 30);
-//        Produto produto3 = new Produto(3, "Produto C", 15.20, new Date(), 40);
-//        Produto produto4 = new Produto(4, "Produto D", 30.00, new Date(), 20);
-//        Produto produto5 = new Produto(5, "Produto E", 25.80, new Date(), 60);
-//
-//        gestaoProduto.cadastrar(produto1);
-//        gestaoProduto.cadastrar(produto2);
-//        gestaoProduto.cadastrar(produto3);
-//        gestaoProduto.cadastrar(produto4);
-//        gestaoProduto.cadastrar(produto5);
-//        
-//        Venda venda1 = new Venda(1, cliente1, filme1, List.of(produto1, produto2), 1, 15.0, new Date());
-//        Venda venda2 = new Venda(2, cliente2, filme2, List.of(produto3), 2, 6.0, new Date());
-//        Venda venda3 = new Venda(3, cliente3, filme1, List.of(produto1, produto3), 3, 11.0, new Date());
-//        Venda venda4 = new Venda(4, cliente1, filme2, List.of(produto2, produto3), 1, 6.0, new Date());
-//        Venda venda5 = new Venda(5, cliente2, filme1, List.of(produto1, produto2, produto3), 2, 16.0, new Date());
-//        
-//        sistema.iniciarVenda(venda5);
-//        sistema.gerarResumoAtual();
-//        sistema.registrarVenda();
-//        sistema.salvar();
-//       
+        Produto prod = new Produto();
+        System.out.println("Foram instanciadas a classe cliente: " + cliente.getInstancias() + "vezes");
+        System.out.println("Foram instanciadas a classe Produtos: " +prod.getInstancias()+ "vezes");
+        
+        //----- Questão 13
+        //Metodo salvar pois é salvo no JSON
+         
+        //---Questao 14
+        
+       // Todos códigos comentadaso em java DOC
+        
+      
     }
 }

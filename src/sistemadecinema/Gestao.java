@@ -22,7 +22,7 @@ public interface Gestao<T> {
      * 
      * 
      */
-    void salvar(List<T> objeto);
+    void salvar();
     
     /**
      * Busca um objeto do tipo T pelo seu identificador (id).

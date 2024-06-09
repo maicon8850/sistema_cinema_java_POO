@@ -37,15 +37,16 @@ public class GestaoCliente implements Gestao<Cliente>{
     
     /**
      * Salva a lista de clientes em um arquivo JSON.
-     * @param clientes A lista de clientes a ser salva.
      */
+    
     @Override
-    public void salvar(List<Cliente> clientes) {
+     public void salvar() {
         try {
             JSONArray jsonArrayClientes = new JSONArray(); // Cria um novo array JSON
-
+            
+           
             // Itera sobre a lista de clientes
-            for (Cliente cliente : clientes) {
+            for (Cliente cliente : arrayCliente) {
                 // Cria um objeto JSON para cada cliente e adiciona ao array JSON
                 JSONObject jsonCliente = new JSONObject();
                 jsonCliente.put("ID", cliente.getId());
@@ -56,9 +57,11 @@ public class GestaoCliente implements Gestao<Cliente>{
                 jsonCliente.put("telefone", cliente.getTelefone());
                 jsonArrayClientes.put(jsonCliente);
             }
+            
+            //System.out.println(jsonArrayClientes);
 
             // Converte o array JSON em uma string
-            String jsonString = jsonArrayClientes.toString();
+            String jsonString = jsonArrayClientes.toString(4); // Formata com indentação de 4 espaços
 
             // Escreve a string JSON no arquivo
             WR utilitarioArquivo = new WR();
@@ -68,6 +71,7 @@ public class GestaoCliente implements Gestao<Cliente>{
         } catch (Exception e) {
             // Trata exceções
             System.out.println("Ocorreu um erro ao salvar os clientes: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     

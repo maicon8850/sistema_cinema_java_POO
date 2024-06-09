@@ -19,6 +19,10 @@ public class GestaoProduto implements Gestao<Produto> {
         arrayProdutos = new ArrayList<>(); // Inicializa o ArrayList
     }
     
+    public List getListaProdutos(){
+        return arrayProdutos;
+    }
+    
     /**
      * Método para cadastrar um novo produto no sistema.
      * 
@@ -32,10 +36,11 @@ public class GestaoProduto implements Gestao<Produto> {
     /**
      * Salva a lista de produtos em um arquivo JSON.
      * 
-     * @param produtos A lista de produtos a ser salva.
      */
     @Override
-    public void salvar(List<Produto> produtos) {
+    public void salvar() {
+        
+        List<Produto> produtos = this.getListaProdutos();
         try {
             JSONArray jsonArrayProdutos = new JSONArray(); // Cria um novo array JSON
 

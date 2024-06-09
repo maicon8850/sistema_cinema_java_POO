@@ -63,47 +63,63 @@ public class Sistema {
     /**
      * Registra a venda no sistema e salva as informações em um arquivo JSON.
      */
-    public void registrarVenda() {
+    
+    public void registrarVenda(Venda venda) {
         try {
-            JSONArray jsonArrayVenda = new JSONArray(); // Cria um novo array JSON
+            // Cria um objeto JSON para a venda
+            JSONObject jsonVenda = new JSONObject();
+            jsonVenda.put("idVenda", venda.getIdVenda());
+            jsonVenda.put("valorTotal", venda.getValorTotal());
+            jsonVenda.put("dataHora", venda.getDataHora());
 
-            // Itera sobre a lista de vendas
-            for (Venda venda : arrayVendaUnica) {
-                // Cria um objeto JSON para cada venda e adiciona ao array JSON
-                JSONObject jsonVenda = new JSONObject();
-                jsonVenda.put("idVenda", venda.getIdVenda());
-                jsonVenda.put("cliente", venda.getCliente().toJson()); // Converte o cliente para JSON
-                jsonVenda.put("filme", venda.getFilme().toJson()); // Converte o filme para JSON
-                JSONArray jsonArrayProdutos = new JSONArray(); // Cria um novo array JSON para os produtos
-                for (Produto produto : venda.getProdutos()) {
-                    jsonArrayProdutos.put(produto.toJson()); // Converte cada produto para JSON e adiciona ao array
-                }
-                jsonVenda.put("produtos", jsonArrayProdutos); // Adiciona o array de produtos ao objeto JSON da venda
-                jsonVenda.put("balcaoAtendimento", venda.getBalcaoAtendimento());
-                jsonVenda.put("valorTotal", venda.getValorTotal());
-                jsonVenda.put("dataHora", venda.getDataHora().toString()); // Salva a data e hora como string
+            // Cria um array JSON para os produtos da venda
+            JSONArray jsonArrayProdutos = new JSONArray();
+            for (Produto produto : venda.getProdutos()) {
+                JSONObject jsonProduto = new JSONObject();
+                jsonProduto.put("nome", produto.getNome());
+                jsonProduto.put("preco", produto.getPreco());
+                jsonArrayProdutos.put(jsonProduto);
+            }
+            jsonVenda.put("produtos", jsonArrayProdutos);
 
-                jsonArrayVenda.put(jsonVenda);
+            // Adiciona os detalhes do filme
+            JSONObject jsonFilme = new JSONObject();
+            jsonFilme.put("titulo", venda.getFilme().getTitulo());
+            jsonFilme.put("legendado", venda.getFilme().isLegendado());
+            jsonFilme.put("dataInicioExibicao", venda.getFilme().getDataInicioExibicao());
+            jsonVenda.put("filme", jsonFilme);
+
+            // Lê o conteúdo atual do arquivo JSON
+            WR utilitarioArquivo = new WR();
+            String conteudoArquivo = utilitarioArquivo.lerArquivo("vendas.json");
+            JSONArray jsonArrayVendas;
+
+            if (conteudoArquivo.isEmpty()) {
+                jsonArrayVendas = new JSONArray();
+            } else {
+                jsonArrayVendas = new JSONArray(conteudoArquivo);
             }
 
-            // Converte o array JSON em uma string
-            String jsonString = jsonArrayVenda.toString();
+            // Adiciona a nova venda ao array de vendas
+            jsonArrayVendas.put(jsonVenda);
 
-            // Escreve a string JSON no arquivo
-            WR utilitarioArquivo = new WR();
-            utilitarioArquivo.escreverNoArquivo(jsonString, "vendas.json", true);
+            // Escreve o array atualizado de vendas de volta no arquivo JSON
+            utilitarioArquivo.escreverNoArquivo(jsonArrayVendas.toString(4), "vendas.json", true);
 
             System.out.println("Venda registrada com sucesso.");
         } catch (Exception e) {
-            // Trata exceções
             System.out.println("Ocorreu um erro ao registrar a venda: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
+  
+    
     /**
      * Gera o resumo atual das vendas realizadas, exibindo informações sobre os produtos, filmes e valores.
      */
-    public void gerarResumoAtual() {
+    public void gerarResumoAtual(){
+        
         for (Venda vendaAtual : arrayVendaUnica) {
             System.out.println("Resumo da Venda:");
             System.out.println("ID da Venda: " + vendaAtual.getIdVenda());
@@ -125,10 +141,15 @@ public class Sistema {
     /**
      * Salva os registros do sistema em arquivos.
      */
-    public void salvar(){
-       gestaoCliente.salvar(gestaoCliente.getListaClientes());
-       gestaoProduto.salvar(gestaoProduto.listar());
-       gestaoFuncionario.salvar(gestaoFuncionario.getListaFuncionario());
-       gestaoFilme.salvar(gestaoFilme.getListaFilme());
+    public void salvar() {
+        System.out.println("Salvando clientes...");
+        gestaoCliente.salvar();
+        System.out.println(gestaoCliente.getListaClientes());
+        System.out.println("Salvando produtos...");
+        gestaoProduto.salvar();
+        System.out.println("Salvando funcionários...");
+        gestaoFuncionario.salvar();
+        System.out.println("Salvando filmes...");
+        gestaoFilme.salvar();
     }
 }

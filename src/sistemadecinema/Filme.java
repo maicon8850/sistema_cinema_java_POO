@@ -281,32 +281,7 @@ public class Filme {
         this.dublado = dublado;
     }
 
-        // Método para converter o Filme em um JSONObject
-    /**
-     * Converte o objeto Filme em um objeto JSONObject.
-     *
-     * @return Um JSONObject contendo as informações do filme.
-     */
-    public JSONObject toJson() {
-        JSONObject jsonFilme = new JSONObject(); // Cria um novo objeto JSONObject
-
-        // Adiciona as informações do filme ao JSONObject
-        jsonFilme.put("idFilme", this.idFilme);
-        jsonFilme.put("titulo", this.titulo);
-        jsonFilme.put("estilo", this.estilo);
-        jsonFilme.put("sinopse", this.sinopse);
-        jsonFilme.put("diretor", this.diretor);
-        jsonFilme.put("duracao", this.duracao);
-        jsonFilme.put("dataLancamento", this.dataLancamento.toString()); // Salva a data de lançamento como string
-        jsonFilme.put("dataInicioExibicao", this.dataInicioExibicao.toString()); // Salva a data de início de exibição como string
-        jsonFilme.put("dataFimExibicao", this.dataFimExibicao.toString()); // Salva a data de fim de exibição como string
-        jsonFilme.put("numeroAssistencias", this.numeroAssistencias);
-        jsonFilme.put("avaliacao", this.avaliacao);
-        jsonFilme.put("legendado", this.legendado);
-        jsonFilme.put("dublado", this.dublado);
-
-        return jsonFilme; // Retorna o JSONObject representando o filme
-    }
+       
     /**
      * Retorna uma representação em string do objeto Filme.
      *

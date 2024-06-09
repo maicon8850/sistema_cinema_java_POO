@@ -41,10 +41,12 @@ public class GestaoFuncionario implements Gestao<Funcionario> {
     
     /**
      * Salva a lista de funcionários em um arquivo JSON.
-     * @param funcionarios A lista de funcionários a ser salva.
      */
     @Override
-    public void salvar(List<Funcionario> funcionarios) {
+    public void salvar() {
+        
+        List<Funcionario> funcionarios = this.getListaFuncionario();
+
         try {
             JSONArray jsonArrayFuncionarios = new JSONArray(); // Cria um novo array JSON
 

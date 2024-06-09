@@ -172,33 +172,6 @@ public class Venda {
         this.dataHora = dataHora;
     }
     
-    // Método para converter a Venda em um JSONObject
-    /**
-     * Converte o objeto Venda em um objeto JSONObject.
-     *
-     * @return Um JSONObject contendo as informações da venda.
-     */
-    public JSONObject toJson() {
-        JSONObject jsonVenda = new JSONObject(); // Cria um novo objeto JSONObject
-
-        // Adiciona as informações da venda ao JSONObject
-        jsonVenda.put("idVenda", this.idVenda);
-        jsonVenda.put("cliente", this.cliente.toJson()); // Converte o cliente para JSONObject usando o método toJson()
-        jsonVenda.put("filme", this.filme.toJson()); // Converte o filme para JSONObject usando o método toJson()
-        
-        // Converte a lista de produtos para JSONArray
-        JSONArray jsonArrayProdutos = new JSONArray();
-        for (Produto produto : this.produtos) {
-            jsonArrayProdutos.put(produto.toJson()); // Converte cada produto para JSONObject usando o método toJson() e adiciona ao JSONArray
-        }
-        jsonVenda.put("produtos", jsonArrayProdutos); // Adiciona o JSONArray de produtos ao JSONObject
-
-        jsonVenda.put("balcaoAtendimento", this.balcaoAtendimento);
-        jsonVenda.put("valorTotal", this.valorTotal);
-        jsonVenda.put("dataHora", this.dataHora.toString()); // Salva a data e hora como string
-
-        return jsonVenda; // Retorna o JSONObject representando a venda
-    }
     
     /**
      * Retorna uma representação em string do objeto Venda.
